@@ -247,126 +247,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/26/img-test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/26/img-test/" itemprop="url">img_test</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-26T22:24:02+08:00">
-                2019-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/2019/04/26/img-test/generator_command.png" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/23/mybatis-generator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -464,129 +344,9 @@
 <h3 id="2-maven引入插件"><a href="#2-maven引入插件" class="headerlink" title="2. maven引入插件"></a>2. maven引入插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;plugin&gt;</span><br><span class="line">	&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">	&lt;configuration&gt;</span><br><span class="line">		&lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">		&lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">		&lt;configurationFile&gt;src/main/resources/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">	&lt;/configuration&gt;</span><br><span class="line">	&lt;executions&gt;</span><br><span class="line">		&lt;execution&gt;</span><br><span class="line">			&lt;id&gt;Generate MyBatis Artifacts&lt;/id&gt;</span><br><span class="line">			&lt;goals&gt;</span><br><span class="line">				&lt;goal&gt;generate&lt;/goal&gt;</span><br><span class="line">			&lt;/goals&gt;</span><br><span class="line">		&lt;/execution&gt;</span><br><span class="line">	&lt;/executions&gt;</span><br><span class="line">	&lt;!--这里在插件中手动加入mysql的驱动依赖，否则可能会出错，报找不到驱动包的异常--&gt;</span><br><span class="line">	&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;5.1.30&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;/dependencies&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="3-idea启动项配置"><a href="#3-idea启动项配置" class="headerlink" title="3. idea启动项配置"></a>3. idea启动项配置</h3><pre><code>点击导航栏中的Run -&gt; edit Configurations... -&gt; 添加maven配置，Command line输入：
     mybatis-generator:generate -edit
-![](assets/generator_command.png)
-</code></pre><h3 id="4-运行效果"><a href="#4-运行效果" class="headerlink" title="4. 运行效果"></a>4. 运行效果</h3><pre><code>![avatar](img/generator_result.png)
+![](mybatis-generator.md/generator_command.png)
+</code></pre><h3 id="4-运行效果"><a href="#4-运行效果" class="headerlink" title="4. 运行效果"></a>4. 运行效果</h3><pre><code>![](mybatis-generator.md/generator_result.png)
 </code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/22/你好，hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/22/你好，hexo/" itemprop="url">你好，hexo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T21:33:07+08:00">
-                2019-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Hello Hello</p>
-
           
         
       
@@ -797,7 +557,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -819,7 +579,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
