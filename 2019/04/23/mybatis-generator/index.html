@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://fengxingxia.github.io/2019/04/23/mybatis-generator/generator_command.png">
 <meta property="og:image" content="https://fengxingxia.github.io/2019/04/23/mybatis-generator/generator_result.png">
-<meta property="og:updated_time" content="2019-04-26T14:43:30.949Z">
+<meta property="og:updated_time" content="2019-04-28T13:26:34.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用mybatis-generator">
 <meta name="twitter:description" content="1. generator的配置12345678910111213141516171819202122232425262728293031323334353637383940414243444546&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;!DOCTYPE generatorConfiguration">
@@ -349,6 +349,9 @@
     mybatis-generator:generate -edit
 </code></pre><p><img src="/2019/04/23/mybatis-generator/generator_command.png" alt></p>
 <h3 id="4-运行效果"><a href="#4-运行效果" class="headerlink" title="4. 运行效果"></a>4. 运行效果</h3><p><img src="/2019/04/23/mybatis-generator/generator_result.png" alt></p>
+<h2 id="4-优劣势"><a href="#4-优劣势" class="headerlink" title="4. 优劣势"></a>4. 优劣势</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>可以自动的生成代码，使用XXXExample的方式，可以不用自己写SQL</p>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>这会导致如果滥用的话，导致索引设计不好设计，建立好的索引会因为使用不当而导致索引失效，出现问题之后无法快速定位到问题</p>
+<p>所以是否使用Example的方式需要慎重</p>
 
       
     </div>
@@ -389,8 +392,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/26/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/28/类型信息/" rel="prev" title="Java类型信息">
+                Java类型信息 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -492,7 +495,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -525,7 +528,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-generator的配置"><span class="nav-number">1.</span> <span class="nav-text">1. generator的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-maven引入插件"><span class="nav-number">2.</span> <span class="nav-text">2. maven引入插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-idea启动项配置"><span class="nav-number">3.</span> <span class="nav-text">3. idea启动项配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-运行效果"><span class="nav-number">4.</span> <span class="nav-text">4. 运行效果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-generator的配置"><span class="nav-number">1.</span> <span class="nav-text">1. generator的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-maven引入插件"><span class="nav-number">2.</span> <span class="nav-text">2. maven引入插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-idea启动项配置"><span class="nav-number">3.</span> <span class="nav-text">3. idea启动项配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-运行效果"><span class="nav-number">4.</span> <span class="nav-text">4. 运行效果</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#4-优劣势"><span class="nav-number"></span> <span class="nav-text">4. 优劣势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优势"><span class="nav-number">1.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#劣势"><span class="nav-number">2.</span> <span class="nav-text">劣势</span></a></li></ol></li></div>
             
 
           </div>
