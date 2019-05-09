@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Mybatis,">
 
 
 
@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="基本构成SqlSessionFactoryBuilder（构造器）​    根据配置信息来生成SqlSessionFacory（工厂接口） SqlSessionFactory​    是一个接口工厂接口而不是实现类，可以通过SqlSessonFactoryBuilder获得。它的任务是创建SqlSession（会话），可以说是每个Mybatis的应用的核心。 ​    可以通过XML配置方式或者编">
+<meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://fengxingxia.github.io/2019/04/22/hello-world/index.html">
+<meta property="og:title" content="Mybatis的基本构成">
+<meta property="og:url" content="https://fengxingxia.github.io/2019/05/08/Mybatis的基本构成/index.html">
 <meta property="og:site_name" content="Summer_wind&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="基本构成SqlSessionFactoryBuilder（构造器）​    根据配置信息来生成SqlSessionFacory（工厂接口） SqlSessionFactory​    是一个接口工厂接口而不是实现类，可以通过SqlSessonFactoryBuilder获得。它的任务是创建SqlSession（会话），可以说是每个Mybatis的应用的核心。 ​    可以通过XML配置方式或者编">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-10-28T00:39:58.000Z">
+<meta property="og:image" content="https://fengxingxia.github.io/2019/05/08/Mybatis的基本构成/Mybatis组件的生命周期.png">
+<meta property="og:updated_time" content="2019-05-09T15:14:15.129Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Mybatis的基本构成">
+<meta name="twitter:description" content="基本构成SqlSessionFactoryBuilder（构造器）​    根据配置信息来生成SqlSessionFacory（工厂接口） SqlSessionFactory​    是一个接口工厂接口而不是实现类，可以通过SqlSessonFactoryBuilder获得。它的任务是创建SqlSession（会话），可以说是每个Mybatis的应用的核心。 ​    可以通过XML配置方式或者编">
+<meta name="twitter:image" content="https://fengxingxia.github.io/2019/05/08/Mybatis的基本构成/Mybatis组件的生命周期.png">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://fengxingxia.github.io/2019/04/22/hello-world/">
+  <link rel="canonical" href="https://fengxingxia.github.io/2019/05/08/Mybatis的基本构成/">
 
 
 
 
 
-  <title>Hello World | Summer_wind's Blog</title>
+  <title>Mybatis的基本构成 | Summer_wind's Blog</title>
   
 
 
@@ -250,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/22/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/08/Mybatis的基本构成/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chen_jianhui">
@@ -267,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis的基本构成</h1>
         
 
         <div class="post-meta">
@@ -279,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T21:00:06+08:00">
-                2019-04-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-08T22:34:39+08:00">
+                2019-05-08
               </time>
             
 
@@ -289,6 +292,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -317,15 +342,27 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a>基本构成</h2><h3 id="SqlSessionFactoryBuilder（构造器）"><a href="#SqlSessionFactoryBuilder（构造器）" class="headerlink" title="SqlSessionFactoryBuilder（构造器）"></a>SqlSessionFactoryBuilder（构造器）</h3><p>​    根据配置信息来生成SqlSessionFacory（工厂接口）</p>
+<h3 id="SqlSessionFactory"><a href="#SqlSessionFactory" class="headerlink" title="SqlSessionFactory"></a>SqlSessionFactory</h3><p>​    是一个接口工厂接口而不是实现类，可以通过SqlSessonFactoryBuilder获得。它的任务是创建SqlSession（会话），可以说是每个Mybatis的应用的核心。</p>
+<p>​    可以通过XML配置方式或者编码方式来创建SqlSessionFactory，强烈建议使用XML配置文件的方式。</p>
+<p>​    通过解析XML配置信息到org.apache.ibatis.session.Confuguration中，这个Configuration类对象将会存在整个Mybatis的生命周期中，另外，Mybatis提供了两个SqlSessionFactory的实现类，一个是DefaultSqlSessionFactory和SqlSessionManger，不过，SqlSessionManger目前还没有使用，Mybatis目前使用的是DefaultSqlSessionFactory</p>
+<h3 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>​    一个既可以发送Sql去执行并返回结果，也可以获取Mapper的接口</p>
+<p>​    是一个接口类，扮演着门面的作用，也就是说，我们只要告诉它我们要什么信息（参数），要做什么（SQL），那么它在一段时间之后就会将结果返回给我们，在这个过程中，我们也只需要关心我们需要什么样的参数和功能，之后会返回什么样的结果给我们就可以了。而中间的处理过程对我们来说是透明的，中间的黑盒操作主要是依靠Executor来实现的。</p>
+<p>​    SQLSession有两个实现类：DefaultSqlSession、SQLSessionManger，每次在使用完SQLSession之后需要正确的进行关闭动作，将连接资源交还给数据库，以免导致资源的匮乏而导致其他问题。</p>
+<p>​    用途：</p>
+<pre><code>1. 获取映射器，让映射器通过命名空间和方法名找到对应的SQL，发送给数据库执行后返回结果
+ 2. 在SqlSession层，可以通过update、insert、delete、select等方法，带上SQL的ID来操作在XML中配置好的SQL，从而完成我们的工作
+</code></pre><h3 id="SQL-Mapper"><a href="#SQL-Mapper" class="headerlink" title="SQL Mapper"></a>SQL Mapper</h3><p>​    由一个接口和XML文件（或注解）组成，需要给出SQL和对应的映射规则，负责发送SQL去执行，并返回结果</p>
+<p>​    作用：</p>
+<pre><code>1. 定义参数类型
+ 2. 描述缓存
+ 3. 描述SQL语句
+ 4. 定义SQL返回结果和POJO的映射关系
+</code></pre><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="SqlSessionFactoryBuilder"><a href="#SqlSessionFactoryBuilder" class="headerlink" title="SqlSessionFactoryBuilder"></a>SqlSessionFactoryBuilder</h3><p>​    它可以通过XML文件或者java编码来构造SQLSessionFactory，可以构造多个SessionFactory，我们在构造完SqlSessionFactory之后，Builder也就完成了它的使命，我们就可以对其进行回收了，所以它的生命周期只需要在方法局部内就可以了。</p>
+<h3 id="SQLSessionFactory"><a href="#SQLSessionFactory" class="headerlink" title="SQLSessionFactory"></a>SQLSessionFactory</h3><p>​    每次程序需要访问数据库的时候，SqlSessionFactory就会创建出SqlSession会话，所以，SqlSessionFactory应该要贯穿于Mybatis的整个生命周期，但是，如果程序中多次创建同一个数据库的SqlSessionFactory，那么每次创建SqlSessionFactory就会打开更多的数据库连接资源，那么数据库连接资源就会很快的被耗尽。所以SqlSessionFactory果断需要配置成单例的，在整个Mybatis的生命周期中，只需要存在同一个数据库的一个SqlSessionFactory实例来管理好数据库的连接就可以了。</p>
+<h3 id="SqlSession-1"><a href="#SqlSession-1" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>​    是一个会话，相当于JDBC的一个Connection对象，它的生命周期是在请求数据库处理事务的过程中，是一个线程不安全的对象。</p>
+<h3 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h3><p>​    应该在一个SqlSession事务方法之内，是一个方法级别的东西。最大的范围是和SqlSession范围相同的。尽量在一个SqlSession中使用它</p>
+<p><img src="/2019/05/08/Mybatis的基本构成/Mybatis组件的生命周期.png" alt></p>
 
       
     </div>
@@ -341,6 +378,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+          
+        </div>
+      
 
       
       
@@ -350,15 +393,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/05/06/Mybatis配置/" rel="next" title="Mybatis配置">
+                <i class="fa fa-chevron-left"></i> Mybatis配置
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/23/mybatis-generator/" rel="prev" title="使用mybatis-generator">
-                使用mybatis-generator <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -492,7 +535,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本构成"><span class="nav-number">1.</span> <span class="nav-text">基本构成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlSessionFactoryBuilder（构造器）"><span class="nav-number">1.1.</span> <span class="nav-text">SqlSessionFactoryBuilder（构造器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlSessionFactory"><span class="nav-number">1.2.</span> <span class="nav-text">SqlSessionFactory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlSession"><span class="nav-number">1.3.</span> <span class="nav-text">SqlSession</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Mapper"><span class="nav-number">1.4.</span> <span class="nav-text">SQL Mapper</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">2.</span> <span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlSessionFactoryBuilder"><span class="nav-number">2.1.</span> <span class="nav-text">SqlSessionFactoryBuilder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLSessionFactory"><span class="nav-number">2.2.</span> <span class="nav-text">SQLSessionFactory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlSession-1"><span class="nav-number">2.3.</span> <span class="nav-text">SqlSession</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapper"><span class="nav-number">2.4.</span> <span class="nav-text">Mapper</span></a></li></ol></li></ol></div>
             
 
           </div>

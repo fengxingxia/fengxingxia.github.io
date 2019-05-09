@@ -247,6 +247,325 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/08/Mybatis的基本构成/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/08/Mybatis的基本构成/" itemprop="url">Mybatis的基本构成</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-08T22:34:39+08:00">
+                2019-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a>基本构成</h2><h3 id="SqlSessionFactoryBuilder（构造器）"><a href="#SqlSessionFactoryBuilder（构造器）" class="headerlink" title="SqlSessionFactoryBuilder（构造器）"></a>SqlSessionFactoryBuilder（构造器）</h3><p>​    根据配置信息来生成SqlSessionFacory（工厂接口）</p>
+<h3 id="SqlSessionFactory"><a href="#SqlSessionFactory" class="headerlink" title="SqlSessionFactory"></a>SqlSessionFactory</h3><p>​    是一个接口工厂接口而不是实现类，可以通过SqlSessonFactoryBuilder获得。它的任务是创建SqlSession（会话），可以说是每个Mybatis的应用的核心。</p>
+<p>​    可以通过XML配置方式或者编码方式来创建SqlSessionFactory，强烈建议使用XML配置文件的方式。</p>
+<p>​    通过解析XML配置信息到org.apache.ibatis.session.Confuguration中，这个Configuration类对象将会存在整个Mybatis的生命周期中，另外，Mybatis提供了两个SqlSessionFactory的实现类，一个是DefaultSqlSessionFactory和SqlSessionManger，不过，SqlSessionManger目前还没有使用，Mybatis目前使用的是DefaultSqlSessionFactory</p>
+<h3 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>​    一个既可以发送Sql去执行并返回结果，也可以获取Mapper的接口</p>
+<p>​    是一个接口类，扮演着门面的作用，也就是说，我们只要告诉它我们要什么信息（参数），要做什么（SQL），那么它在一段时间之后就会将结果返回给我们，在这个过程中，我们也只需要关心我们需要什么样的参数和功能，之后会返回什么样的结果给我们就可以了。而中间的处理过程对我们来说是透明的，中间的黑盒操作主要是依靠Executor来实现的。</p>
+<p>​    SQLSession有两个实现类：DefaultSqlSession、SQLSessionManger，每次在使用完SQLSession之后需要正确的进行关闭动作，将连接资源交还给数据库，以免导致资源的匮乏而导致其他问题。</p>
+<p>​    用途：</p>
+<pre><code>1. 获取映射器，让映射器通过命名空间和方法名找到对应的SQL，发送给数据库执行后返回结果
+ 2. 在SqlSession层，可以通过update、insert、delete、select等方法，带上SQL的ID来操作在XML中配置好的SQL，从而完成我们的工作
+</code></pre><h3 id="SQL-Mapper"><a href="#SQL-Mapper" class="headerlink" title="SQL Mapper"></a>SQL Mapper</h3><p>​    由一个接口和XML文件（或注解）组成，需要给出SQL和对应的映射规则，负责发送SQL去执行，并返回结果</p>
+<p>​    作用：</p>
+<pre><code>1. 定义参数类型
+ 2. 描述缓存
+ 3. 描述SQL语句
+ 4. 定义SQL返回结果和POJO的映射关系
+</code></pre><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="SqlSessionFactoryBuilder"><a href="#SqlSessionFactoryBuilder" class="headerlink" title="SqlSessionFactoryBuilder"></a>SqlSessionFactoryBuilder</h3><p>​    它可以通过XML文件或者java编码来构造SQLSessionFactory，可以构造多个SessionFactory，我们在构造完SqlSessionFactory之后，Builder也就完成了它的使命，我们就可以对其进行回收了，所以它的生命周期只需要在方法局部内就可以了。</p>
+<h3 id="SQLSessionFactory"><a href="#SQLSessionFactory" class="headerlink" title="SQLSessionFactory"></a>SQLSessionFactory</h3><p>​    每次程序需要访问数据库的时候，SqlSessionFactory就会创建出SqlSession会话，所以，SqlSessionFactory应该要贯穿于Mybatis的整个生命周期，但是，如果程序中多次创建同一个数据库的SqlSessionFactory，那么每次创建SqlSessionFactory就会打开更多的数据库连接资源，那么数据库连接资源就会很快的被耗尽。所以SqlSessionFactory果断需要配置成单例的，在整个Mybatis的生命周期中，只需要存在同一个数据库的一个SqlSessionFactory实例来管理好数据库的连接就可以了。</p>
+<h3 id="SqlSession-1"><a href="#SqlSession-1" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>​    是一个会话，相当于JDBC的一个Connection对象，它的生命周期是在请求数据库处理事务的过程中，是一个线程不安全的对象。</p>
+<h3 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h3><p>​    应该在一个SqlSession事务方法之内，是一个方法级别的东西。最大的范围是和SqlSession范围相同的。尽量在一个SqlSession中使用它</p>
+<p><img src="/2019/05/08/Mybatis的基本构成/Mybatis组件的生命周期.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/06/Mybatis配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/06/Mybatis配置/" itemprop="url">Mybatis配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T23:26:05+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-XML方式与注解方式对比"><a href="#1-XML方式与注解方式对比" class="headerlink" title="1. XML方式与注解方式对比"></a>1. XML方式与注解方式对比</h3><ol>
+<li><p>使用Mapper.xml的方式</p>
+<p>优势：和接口分离，便于统一管理； 复杂的语句不会影响接口的可读性，可以带来更灵活的空间</p>
+<p>劣势：存在较多的XML文件</p>
+</li>
+<li><p>使用注解的方式</p>
+<p>优势：在接口层就能看到对应的SQL，不需要再去查找xml文件，可读性高，较为方便</p>
+<p>劣势：如果存在较为复杂的联合查询，那么会因为SQL语句过长而影响阅读，导致可读性降低；另外，这种方式的SQL无法进行复用，也就是无法使用xml文件中的include方式。</p>
+</li>
+</ol>
+<h3 id="2-配置文件"><a href="#2-配置文件" class="headerlink" title="2. 配置文件"></a>2. 配置文件</h3><p>​    mybatis-config.xml中配置的每一个信息都可以在org.apache.ibatis.session.Configuration类中找到对应的属性，其实说白了，在xml中配置这么多的属性，就是为了组装这个Configuration的</p>
+<h6 id="属性配置"><a href="#属性配置" class="headerlink" title="属性配置"></a>属性配置</h6><p>​    mybatis的配置文件中的值可以在外部配置，可以通过配置properties文件的方式。在mybatis-config.xml中以如${ driver.class }的方式引入。</p>
+<p>​    如果在项目中多处配置了属性的值，优先级如下：</p>
+<p>​    方法参数传递的属性  –&gt;  properties resource中指定的URL文件  –&gt;  最后是properties体中指定的属性</p>
+<p>​    从mybatis3.4.2开始，可以为占位符设定一个默认值，如：${username: mysql}，这里如果username没有配置的话，那么将取mysql作为参数值。如果需要使用这一特性，必须要启用默认值特性：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">"org/mybatis/example/config.properties"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"org.apache.ibatis.parsing.PropertyParser.enable-default-value"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span> <span class="comment">&lt;!-- 启用默认值特性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/28/类型信息/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -707,7 +1026,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
