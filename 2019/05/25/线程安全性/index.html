@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="线程安全性​    要编写线程安全的代码，核心是对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。 什么是线程安全性​    当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类">
+<meta name="description" content="线程安全性​        要编写线程安全的代码，核心是对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。 什么是线程安全性​        当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的">
 <meta name="keywords" content="Java线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线程安全性">
 <meta property="og:url" content="https://fengxingxia.github.io/2019/05/25/线程安全性/index.html">
 <meta property="og:site_name" content="Summer_wind&#39;s Blog">
-<meta property="og:description" content="线程安全性​    要编写线程安全的代码，核心是对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。 什么是线程安全性​    当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类">
+<meta property="og:description" content="线程安全性​        要编写线程安全的代码，核心是对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。 什么是线程安全性​        当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-02T16:00:07.615Z">
+<meta property="og:updated_time" content="2019-06-08T09:31:39.392Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程安全性">
-<meta name="twitter:description" content="线程安全性​    要编写线程安全的代码，核心是对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。 什么是线程安全性​    当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类">
+<meta name="twitter:description" content="线程安全性​        要编写线程安全的代码，核心是对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。 什么是线程安全性​        当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的">
 
 
 
@@ -340,10 +340,17 @@
       
 
       
-        <h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>​    要编写线程安全的代码，核心是<font color="red">对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问</font>，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。</p>
-<h3 id="什么是线程安全性"><a href="#什么是线程安全性" class="headerlink" title="什么是线程安全性"></a>什么是线程安全性</h3><p>​    当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类就称作是线程安全的。</p>
-<p>​    无状态对象一定是线程安全的（不包含任何域也不包含任何引用对象的域），比如大多数的Servlet都是无状态的，只有当Servlet在处理一些请求需要保存数据时，才不是线程安全的。</p>
-<p>​    从虚拟机的角度来看，无状态的对象的临时状态都是存储在线程栈中的局部变量中的，只允许当前线程访问。而不会受其他线程的影响。另外，类信息是存储在方法区中的，是共享的。类信息中包含了类的版本、字段、类名、接口、方法等信息。类的字段信息是可变的，线程的不安全性也正是因为对共享的、可变的状态的访问无法保证其正确性而引起的。所以，无状态的对象一定是线程安全的。</p>
+        <h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>​        要编写线程安全的代码，核心是<font color="red">对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问</font>，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。</p>
+<h3 id="什么是线程安全性"><a href="#什么是线程安全性" class="headerlink" title="什么是线程安全性"></a>什么是线程安全性</h3><p>​        当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类就称作是线程安全的。</p>
+<p>​        无状态对象一定是线程安全的（不包含任何域也不包含任何引用对象的域），比如大多数的Servlet都是无状态的，只有当Servlet在处理一些请求需要保存数据时，才不是线程安全的。</p>
+<p>​        从虚拟机的角度来看，无状态的对象的临时状态都是存储在线程栈中的局部变量中的，只允许当前线程访问。而不会受其他线程的影响。另外，类信息是存储在方法区中的，是共享的。类信息中包含了类的版本、字段、类名、接口、方法等信息。类的字段信息是可变的，线程的不安全性也正是因为对共享的、可变的状态的访问无法保证其正确性而引起的。所以，无状态的对象一定是线程安全的。</p>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>​        原子性的操作是不可被中断的，即使是多个线程同时执行，也互不干扰。</p>
+<h5 id="竞态条件"><a href="#竞态条件" class="headerlink" title="竞态条件"></a>竞态条件</h5><p>​        当某个结果的正确性取决于多个线程的交替时序的时候，那么就会发生竞态条件。最常见的竞态类型就是“先检查再运行”，即通过一个可能失效的结果来决定下一步的动作。这个失效的结果可能给你带来未预期的异常，数据被覆盖的。</p>
+<p>​        “先检查后执行”的最常见的一种情况就是延迟初始化，所谓延迟初始化，就是将对象的初始化延迟到使用该对象时才进行，比如单例模式，如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Singleton singleton = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == singleton) &#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        如上的代码可能会出现多个Singleton的实例。比如线程A在进行条件判断，看到singleton为空，就会去创建实例，而此时线程B进来，也同样需要判断条件，而此时的singleton是否为null，则取决于不可预计的时序，以及线程的调度方式，所以，这两次调用getInstance( )，可能得到的实例并不是同一个实例。这就违法了单例模式了。</p>
+<p>​        另外一种常见的竞态条件，发生在“读取-修改-写入”的操作中，例如递增计数器( count++ )。在使用递增计数器的时候，你必须要先获取先前的值，然后确保在执行更新过程中不会被其他线程修改和读取这个值。</p>
+<h5 id="复合操作"><a href="#复合操作" class="headerlink" title="复合操作"></a>复合操作</h5><p>​        这是另外一个常见的竟态条件，包含了一组需要以原子方式执行的操作，也就是当前线程在修改某个变量时，必须通过某种方式来阻止其他线程来使用这个变量，从而确保其他线程只能在修改操作完成之前或之后来读取或修改这个变量。</p>
 <p>​    </p>
 
       
@@ -384,6 +391,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/08/Mybatis实用以及问题/" rel="prev" title="Mybatis实用以及问题">
+                Mybatis实用以及问题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -462,7 +473,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -473,7 +484,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -484,7 +495,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -517,7 +528,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全性"><span class="nav-number">1.</span> <span class="nav-text">线程安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是线程安全性"><span class="nav-number">2.</span> <span class="nav-text">什么是线程安全性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全性"><span class="nav-number">1.</span> <span class="nav-text">线程安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是线程安全性"><span class="nav-number">2.</span> <span class="nav-text">什么是线程安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性"><span class="nav-number">3.</span> <span class="nav-text">原子性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#竞态条件"><span class="nav-number">3.0.1.</span> <span class="nav-text">竞态条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复合操作"><span class="nav-number">3.0.2.</span> <span class="nav-text">复合操作</span></a></li></ol></li></ol></div>
             
 
           </div>

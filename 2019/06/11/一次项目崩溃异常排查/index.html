@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="项目经历,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Summer_wind&#39;s Blog">
-<meta property="og:url" content="https://fengxingxia.github.io/archives/2019/index.html">
+<meta name="description" content="​        项目崩溃，Web页面进不去，用top命令查看发现java和mysql占用的CPU异常高，服务器配置的16G内存，也只剩几百M了。 ​        排查过程： ​        1. 查看日志，各应用日志没有发现明显的异常，但是在Tomcat的日志中却疯狂出现OutOfMemoryError异常。 2. 抓取dump文件进行分析，发现一个接收mq的处理类里面用了ArrayBloc">
+<meta name="keywords" content="项目经历">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次项目崩溃异常排查">
+<meta property="og:url" content="https://fengxingxia.github.io/2019/06/11/一次项目崩溃异常排查/index.html">
 <meta property="og:site_name" content="Summer_wind&#39;s Blog">
+<meta property="og:description" content="​        项目崩溃，Web页面进不去，用top命令查看发现java和mysql占用的CPU异常高，服务器配置的16G内存，也只剩几百M了。 ​        排查过程： ​        1. 查看日志，各应用日志没有发现明显的异常，但是在Tomcat的日志中却疯狂出现OutOfMemoryError异常。 2. 抓取dump文件进行分析，发现一个接收mq的处理类里面用了ArrayBloc">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-11T13:43:57.600Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Summer_wind&#39;s Blog">
+<meta name="twitter:title" content="一次项目崩溃异常排查">
+<meta name="twitter:description" content="​        项目崩溃，Web页面进不去，用top命令查看发现java和mysql占用的CPU异常高，服务器配置的16G内存，也只剩几百M了。 ​        排查过程： ​        1. 查看日志，各应用日志没有发现明显的异常，但是在Tomcat的日志中却疯狂出现OutOfMemoryError异常。 2. 抓取dump文件进行分析，发现一个接收mq的处理类里面用了ArrayBloc">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://fengxingxia.github.io/archives/2019/">
+  <link rel="canonical" href="https://fengxingxia.github.io/2019/06/11/一次项目崩溃异常排查/">
 
 
 
 
 
-  <title>Archive | Summer_wind's Blog</title>
+  <title>一次项目崩溃异常排查 | Summer_wind's Blog</title>
   
 
 
@@ -138,7 +143,7 @@
   
   
 
-  <div class="container  page-archive">
+  <div class="container  page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -232,387 +237,183 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/11/一次项目崩溃异常排查/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">一次项目崩溃异常排查</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T21:01:49+08:00">
+                2019-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 10 posts in total. Keep on posting.
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目经历/" itemprop="url" rel="index">
+                    <span itemprop="name">项目经历</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/11/一次项目崩溃异常排查/" itemprop="url">
-              
-                <span itemprop="name">一次项目崩溃异常排查</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-11T21:01:49+08:00" content="2019-06-11">
-          06-11
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/09/synchronized关键字/" itemprop="url">
-              
-                <span itemprop="name">synchronized关键字</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-09T22:21:29+08:00" content="2019-06-09">
-          06-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/08/Mybatis实用以及问题/" itemprop="url">
-              
-                <span itemprop="name">Mybatis实用以及问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-08T21:33:50+08:00" content="2019-06-08">
-          06-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/25/线程安全性/" itemprop="url">
-              
-                <span itemprop="name">线程安全性</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-25T18:12:17+08:00" content="2019-05-25">
-          05-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        <p>​        项目崩溃，Web页面进不去，用top命令查看发现java和mysql占用的CPU异常高，服务器配置的16G内存，也只剩几百M了。</p>
+<p>​        排查过程：</p>
+<p>​        1. 查看日志，各应用日志没有发现明显的异常，但是在Tomcat的日志中却疯狂出现OutOfMemoryError异常。</p>
+<pre><code>2. 抓取dump文件进行分析，发现一个接收mq的处理类里面用了ArrayBlockingQueue，每一次mq消息过来之后，并不是马上就处理，而是先添加到BlockingQueue里面，之后再从BlockingQueue中取出消息进行处理。问题也就出现在这个Queue里面，当时设的这个queue的最大值为100000。出问题时，队列里还有十多万的数据堆积，也就是说queue缓存队列已经塞满了，查看dump文件，也确实这个BlockingQueue就占用了600多m的内存，而且不仅这一个队列，还有另外一个缓存队列也占用了近300M的内存大小。
+  3. 发现这个问题之后，为了让现场可以继续使用，马上将BlockingQueue的大小改小了，重新打包扔到线上。
+  4. 出现这个问题的原因也有因为消费者是单线程消费而且每次只从BlockingQueue中poll出一条数据进行处理的原因，后续改成了多线程消费，且每次从队列中取出20条数据进行处理。这样Java的内存消耗和CPU占用也就降下来了。
+  5. 但是MySQL的占用依然很高，使用mysql -h 127.0.0.1 -u mysql -p 登录到数据库之后，使用show full processlist;发现有一条SQL的执行效率比较低，需要2S多的时间，而且这条SQL还在大量的使用。
+  6. 查看对应的表发现这个表没有建索引，根据条件字段建立索引之后，MySQL的CPU占用率立马降下来了。这样，线上的应用也就恢复了正常
+  7. 这样跑了两天之后，突然又崩溃了。但是这次Java和MySQL的内存和CPU占用都不高，这就很奇怪了。
+  8. 刚开始查看了日志，发现RabbitMq连接不上，日志中一直在报RabbitMq Connect time out的错误。但是大佬说这应该不会影响整个应用，导致web页面进不去（页面报read time out异常），于是就就继续找原因。开始抓取线上的堆栈信息进行分析。
+  9. 之后，还发现一个现象，所有通过http方式访问Tomcat中的应用的地方都不行了。
+  10. 最后发现，应用对外提供了一个http接口，在这个接口中会发送RabbitMq消息给其他系统，而这时的RabbitMq是连不上的，但是，每一次请求过来都会去新建一个Cononection和Channel，这样就会导致在调用这个接口的时候需要等到RabbitMq连接超时了之后，才会断开。而RabbitMq的超时时间默认是1分钟，而在这一分钟内，这个接口被大量的调用，导致大量的http连接资源被占用得不到及时的释放。
+  11. 查看Tomcat Server.xml中的配置，了解到配置的MaxThreads为150，MaxAccept为300。也就是说最多支持的http并发连接为450
+  12. 在项目中，由于设备采集的人脸、车辆抓拍的信息相当多，再加上RabbitMq连接不上，也就出现了这个问题。
+  13. 最后，当然是配置了正确的RabbitMq地址之后，解决了问题。
+</code></pre>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/16/environments配置环境/" itemprop="url">
-              
-                <span itemprop="name">environments配置环境</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-16T21:56:50+08:00" content="2019-05-16">
-          05-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/08/Mybatis的基本构成/" itemprop="url">
-              
-                <span itemprop="name">Mybatis的基本构成</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-08T22:34:39+08:00" content="2019-05-08">
-          05-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/06/Mybatis配置/" itemprop="url">
-              
-                <span itemprop="name">Mybatis配置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-06T23:26:05+08:00" content="2019-05-06">
-          05-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/28/类型信息/" itemprop="url">
-              
-                <span itemprop="name">Java类型信息</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-28T22:03:13+08:00" content="2019-04-28">
-          04-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/23/mybatis-generator/" itemprop="url">
-              
-                <span itemprop="name">使用mybatis-generator</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-23T22:05:35+08:00" content="2019-04-23">
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/22/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T21:00:06+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目经历/" rel="tag"># 项目经历</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/09/synchronized关键字/" rel="next" title="synchronized关键字">
+                <i class="fa fa-chevron-left"></i> synchronized关键字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -620,6 +421,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -836,6 +641,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

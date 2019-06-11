@@ -247,6 +247,440 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/11/一次项目崩溃异常排查/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/11/一次项目崩溃异常排查/" itemprop="url">一次项目崩溃异常排查</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T21:01:49+08:00">
+                2019-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目经历/" itemprop="url" rel="index">
+                    <span itemprop="name">项目经历</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​        项目崩溃，Web页面进不去，用top命令查看发现java和mysql占用的CPU异常高，服务器配置的16G内存，也只剩几百M了。</p>
+<p>​        排查过程：</p>
+<p>​        1. 查看日志，各应用日志没有发现明显的异常，但是在Tomcat的日志中却疯狂出现OutOfMemoryError异常。</p>
+<pre><code>2. 抓取dump文件进行分析，发现一个接收mq的处理类里面用了ArrayBlockingQueue，每一次mq消息过来之后，并不是马上就处理，而是先添加到BlockingQueue里面，之后再从BlockingQueue中取出消息进行处理。问题也就出现在这个Queue里面，当时设的这个queue的最大值为100000。出问题时，队列里还有十多万的数据堆积，也就是说queue缓存队列已经塞满了，查看dump文件，也确实这个BlockingQueue就占用了600多m的内存，而且不仅这一个队列，还有另外一个缓存队列也占用了近300M的内存大小。
+  3. 发现这个问题之后，为了让现场可以继续使用，马上将BlockingQueue的大小改小了，重新打包扔到线上。
+  4. 出现这个问题的原因也有因为消费者是单线程消费而且每次只从BlockingQueue中poll出一条数据进行处理的原因，后续改成了多线程消费，且每次从队列中取出20条数据进行处理。这样Java的内存消耗和CPU占用也就降下来了。
+  5. 但是MySQL的占用依然很高，使用mysql -h 127.0.0.1 -u mysql -p 登录到数据库之后，使用show full processlist;发现有一条SQL的执行效率比较低，需要2S多的时间，而且这条SQL还在大量的使用。
+  6. 查看对应的表发现这个表没有建索引，根据条件字段建立索引之后，MySQL的CPU占用率立马降下来了。这样，线上的应用也就恢复了正常
+  7. 这样跑了两天之后，突然又崩溃了。但是这次Java和MySQL的内存和CPU占用都不高，这就很奇怪了。
+  8. 刚开始查看了日志，发现RabbitMq连接不上，日志中一直在报RabbitMq Connect time out的错误。但是大佬说这应该不会影响整个应用，导致web页面进不去（页面报read time out异常），于是就就继续找原因。开始抓取线上的堆栈信息进行分析。
+  9. 之后，还发现一个现象，所有通过http方式访问Tomcat中的应用的地方都不行了。
+  10. 最后发现，应用对外提供了一个http接口，在这个接口中会发送RabbitMq消息给其他系统，而这时的RabbitMq是连不上的，但是，每一次请求过来都会去新建一个Cononection和Channel，这样就会导致在调用这个接口的时候需要等到RabbitMq连接超时了之后，才会断开。而RabbitMq的超时时间默认是1分钟，而在这一分钟内，这个接口被大量的调用，导致大量的http连接资源被占用得不到及时的释放。
+  11. 查看Tomcat Server.xml中的配置，了解到配置的MaxThreads为150，MaxAccept为300。也就是说最多支持的http并发连接为450
+  12. 在项目中，由于设备采集的人脸、车辆抓拍的信息相当多，再加上RabbitMq连接不上，也就出现了这个问题。
+  13. 最后，当然是配置了正确的RabbitMq地址之后，解决了问题。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/09/synchronized关键字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/09/synchronized关键字/" itemprop="url">synchronized关键字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-09T22:21:29+08:00">
+                2019-06-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="synchronized的作用"><a href="#synchronized的作用" class="headerlink" title="synchronized的作用"></a>synchronized的作用</h3><p>​        <font color="red">互斥锁，对某个对象加锁</font>，这里所说的并不是锁住栈中的一个引用，而是锁定的是堆中的对象，这一点很重要，如果是锁定的是对象的引用，那么引用可能在某个时刻之后指向的是其他的对象，这就有问题了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Synchronized01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> staticCount = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            count--;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">" count = "</span> + count);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">printCount2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        staticCount--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        printCount( )也可以直接在方法上加synchronized，因为该方法中的所有操作步骤都是在synchronized中的。printCount锁定的是当前对象，而printCount2( ) 锁定的是Synchronized01的Class对象，这两者是不一样的，当调用静态方法时是不需要创建对象的，那么自然也就没有对当前对象  this  上锁这么一说了。</p>
+<h3 id="同步方法和非同步方法是否可以同时调用？"><a href="#同步方法和非同步方法是否可以同时调用？" class="headerlink" title="同步方法和非同步方法是否可以同时调用？"></a>同步方法和非同步方法是否可以同时调用？</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">m1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"method m1() start"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">10000L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"method m1() end"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">m2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"method m2() start"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        T t = <span class="keyword">new</span> T();</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; t.m1()).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(t::m2).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        如上的代码中，在m1( )方法被调用的时候，m2( ) 是否会执行？答案是肯定的，因为m2( )没有加锁，自然也就不需要等待m1( )执行完释放锁之后再执行了。这也说明了，<font color="red">在对业务写方法加锁，而对业务读方法没有加锁时，容易产生脏读的问题</font>，因为在写过程中，状态的值还没有修改完，就已经被另外的线程读取了，而另外的线程读取到的并不是完全修改之后的值。</p>
+<h3 id="一个同步方法可以调用另外一个同步方法"><a href="#一个同步方法可以调用另外一个同步方法" class="headerlink" title="一个同步方法可以调用另外一个同步方法"></a>一个同步方法可以调用另外一个同步方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Synchronized02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">print1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"method print1 "</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        print2();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">print2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"method print2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Synchronized02 synchronized02 = <span class="keyword">new</span> Synchronized02();</span><br><span class="line">        synchronized02.print1();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** console output:</span></span><br><span class="line"><span class="comment">    	method print1 </span></span><br><span class="line"><span class="comment">		method print2</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        一个线程已经拥有了某个对象的锁，那么再次申请 的时候仍然可以获得该对象的锁。也就是说synchronized的锁是可重入的。</p>
+<p>​        对象在内存中的布局可以分为三部分：对象头信息、实例数据、对齐填充。</p>
+<p>​        而在对象头信息中又包含了两部分的信息，其中一部分就存储了GC分代年龄、hash码以及锁状态标志等的信息。</p>
+<p>​        在子类的同步中也同样是可以调用父类的同步方法的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">m1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"parent method start"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"parent method end"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TT tt = <span class="keyword">new</span> TT();</span><br><span class="line">        tt.m1();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TT</span> <span class="keyword">extends</span> <span class="title">T</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">m1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"child method start"</span>);</span><br><span class="line">        <span class="keyword">super</span>.m1();</span><br><span class="line">        System.out.println(<span class="string">"child method end"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	console output:</span></span><br><span class="line"><span class="comment">        child method start</span></span><br><span class="line"><span class="comment">        parent method start</span></span><br><span class="line"><span class="comment">        parent method end</span></span><br><span class="line"><span class="comment">        child method end</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="发生异常时，锁会被释放"><a href="#发生异常时，锁会被释放" class="headerlink" title="发生异常时，锁会被释放"></a>发生异常时，锁会被释放</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Synchronized03</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" start"</span>);</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000L</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"count = "</span> + count);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 抛出异常，锁释放，其他线程可以争用</span></span><br><span class="line">            <span class="keyword">if</span> (count == <span class="number">3</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;<span class="comment">// 抛出异常，锁被释放，如果不想释放，可以在这里catch，然后让循环继续。</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Synchronized03 synchronized03 = <span class="keyword">new</span> Synchronized03();</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; synchronized03.m(), <span class="string">"t1"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; synchronized03.m(), <span class="string">"t2"</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    	console output:</span></span><br><span class="line"><span class="comment">    		t1 start</span></span><br><span class="line"><span class="comment">            count = 1</span></span><br><span class="line"><span class="comment">            count = 2</span></span><br><span class="line"><span class="comment">            count = 3</span></span><br><span class="line"><span class="comment">            Exception in thread "t1" java.lang.ArithmeticException: / by zero</span></span><br><span class="line"><span class="comment">            t2 start</span></span><br><span class="line"><span class="comment">                at com.ethereal.thread.syncdemo.Synchronized03.m(Synchronized03.java:29)</span></span><br><span class="line"><span class="comment">                at com.ethereal.thread.syncdemo.Synchronized03.lambda$main$0(Synchronized03.java:37)</span></span><br><span class="line"><span class="comment">                at java.lang.Thread.run(Thread.java:748)</span></span><br><span class="line"><span class="comment">            count = 4</span></span><br><span class="line"><span class="comment">            count = 5</span></span><br><span class="line"><span class="comment">            count = 6</span></span><br><span class="line"><span class="comment">                */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        如果线程t1在执行过程中抛出异常之后，锁没有释放，那么线程t2是永远不会执行的，显然与结果不符。如果想要锁不被释放，那么可以将异常捕获再进行相应的处理。</p>
+<h3 id="Volatile关键字"><a href="#Volatile关键字" class="headerlink" title="Volatile关键字"></a>Volatile关键字</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Volatile01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> running = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"method m start"</span>);</span><br><span class="line">        <span class="keyword">while</span> (running) &#123;</span><br><span class="line">            <span class="comment">/*try &#123;</span></span><br><span class="line"><span class="comment">                TimeUnit.MILLISECONDS.sleep(10);</span></span><br><span class="line"><span class="comment">            &#125; catch (InterruptedException e) &#123;</span></span><br><span class="line"><span class="comment">                e.printStackTrace();</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">            System.out.println("adfsadf");*/</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"method m end"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Volatile01 t = <span class="keyword">new</span> Volatile01();</span><br><span class="line">        <span class="keyword">new</span> Thread(t::m, <span class="string">"t1"</span>).start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        t.running = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        如上的代码中，如果running属性没有使用volatile修饰的话，那么整个程序将陷入无限循环中，不会结束，而加了之后，则可以正常结束。这是因为，线程在执行的过程中，会将主内存（包括堆、栈内存等）中的数据读取到自己的缓冲区中，之后再使用的时候是从自己的缓冲区中读取该变量的值，而不是每次都从主内存中重新刷取一遍。所以，在main线程修改了running的值之后，会将修改之后的值刷同步到主内存中。但是其他线程如 t1 由于每次只从自己的缓冲区中读取数据，所以并不知道running的值已经被修改了，程序也就不会停止了。</p>
+<p>​        在使用了volatile修饰running后，当一个线程修改了对象的共享状态的值的时候，会通知其他线程再从主内存中将该变量的值写回到自己的缓冲区中，这样就解决了内存的可见性问题。注意，这里说的是通知其他线程重新获取，而不是每次都从主内存中获取变量的值。</p>
+<p>​        但是，如果在  while(running) 循环中，加入打印语句或者休眠一会，程序是有可能停止的。这是因为，当在执行这些操作的时候，CPU有可能有空闲的时间从主内存中，将自己缓冲区的数据刷新一遍。但这并不一定会发生，所以，该用volatile的时候就要用。它相对于synchronized轻的多的多。</p>
+<p>​        使用了volatile之后，性能会稍微下降一些，因为使用了volatile之后，jvm将不会进行重排序。另外，volatile并不能保证原子性也不具备“互斥性”。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/08/Mybatis实用以及问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/08/Mybatis实用以及问题/" itemprop="url">Mybatis实用以及问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-08T21:33:50+08:00">
+                2019-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/25/线程安全性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -340,10 +774,17 @@
       
         
           
-            <h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>​    要编写线程安全的代码，核心是<font color="red">对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问</font>，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。</p>
-<h3 id="什么是线程安全性"><a href="#什么是线程安全性" class="headerlink" title="什么是线程安全性"></a>什么是线程安全性</h3><p>​    当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类就称作是线程安全的。</p>
-<p>​    无状态对象一定是线程安全的（不包含任何域也不包含任何引用对象的域），比如大多数的Servlet都是无状态的，只有当Servlet在处理一些请求需要保存数据时，才不是线程安全的。</p>
-<p>​    从虚拟机的角度来看，无状态的对象的临时状态都是存储在线程栈中的局部变量中的，只允许当前线程访问。而不会受其他线程的影响。另外，类信息是存储在方法区中的，是共享的。类信息中包含了类的版本、字段、类名、接口、方法等信息。类的字段信息是可变的，线程的不安全性也正是因为对共享的、可变的状态的访问无法保证其正确性而引起的。所以，无状态的对象一定是线程安全的。</p>
+            <h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>​        要编写线程安全的代码，核心是<font color="red">对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问</font>，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。</p>
+<h3 id="什么是线程安全性"><a href="#什么是线程安全性" class="headerlink" title="什么是线程安全性"></a>什么是线程安全性</h3><p>​        当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类就称作是线程安全的。</p>
+<p>​        无状态对象一定是线程安全的（不包含任何域也不包含任何引用对象的域），比如大多数的Servlet都是无状态的，只有当Servlet在处理一些请求需要保存数据时，才不是线程安全的。</p>
+<p>​        从虚拟机的角度来看，无状态的对象的临时状态都是存储在线程栈中的局部变量中的，只允许当前线程访问。而不会受其他线程的影响。另外，类信息是存储在方法区中的，是共享的。类信息中包含了类的版本、字段、类名、接口、方法等信息。类的字段信息是可变的，线程的不安全性也正是因为对共享的、可变的状态的访问无法保证其正确性而引起的。所以，无状态的对象一定是线程安全的。</p>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>​        原子性的操作是不可被中断的，即使是多个线程同时执行，也互不干扰。</p>
+<h5 id="竞态条件"><a href="#竞态条件" class="headerlink" title="竞态条件"></a>竞态条件</h5><p>​        当某个结果的正确性取决于多个线程的交替时序的时候，那么就会发生竞态条件。最常见的竞态类型就是“先检查再运行”，即通过一个可能失效的结果来决定下一步的动作。这个失效的结果可能给你带来未预期的异常，数据被覆盖的。</p>
+<p>​        “先检查后执行”的最常见的一种情况就是延迟初始化，所谓延迟初始化，就是将对象的初始化延迟到使用该对象时才进行，比如单例模式，如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Singleton singleton = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == singleton) &#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        如上的代码可能会出现多个Singleton的实例。比如线程A在进行条件判断，看到singleton为空，就会去创建实例，而此时线程B进来，也同样需要判断条件，而此时的singleton是否为null，则取决于不可预计的时序，以及线程的调度方式，所以，这两次调用getInstance( )，可能得到的实例并不是同一个实例。这就违法了单例模式了。</p>
+<p>​        另外一种常见的竞态条件，发生在“读取-修改-写入”的操作中，例如递增计数器( count++ )。在使用递增计数器的时候，你必须要先获取先前的值，然后确保在执行更新过程中不会被其他线程修改和读取这个值。</p>
+<h5 id="复合操作"><a href="#复合操作" class="headerlink" title="复合操作"></a>复合操作</h5><p>​        这是另外一个常见的竟态条件，包含了一组需要以原子方式执行的操作，也就是当前线程在修改某个变量时，必须通过某种方式来阻止其他线程来使用这个变量，从而确保其他线程只能在修改操作完成之前或之后来读取或修改这个变量。</p>
 <p>​    </p>
 
           
@@ -1363,7 +1804,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1374,7 +1815,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1385,7 +1826,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
