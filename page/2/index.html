@@ -247,6 +247,1085 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/08/Mybatis实用以及问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/08/Mybatis实用以及问题/" itemprop="url">Mybatis实用以及问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-08T21:33:50+08:00">
+                2019-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/25/线程安全性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/25/线程安全性/" itemprop="url">线程安全性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-25T18:12:17+08:00">
+                2019-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>​        要编写线程安全的代码，核心是<font color="red">对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问</font>，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。</p>
+<h3 id="什么是线程安全性"><a href="#什么是线程安全性" class="headerlink" title="什么是线程安全性"></a>什么是线程安全性</h3><p>​        当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类就称作是线程安全的。</p>
+<p>​        无状态对象一定是线程安全的（不包含任何域也不包含任何引用对象的域），比如大多数的Servlet都是无状态的，只有当Servlet在处理一些请求需要保存数据时，才不是线程安全的。</p>
+<p>​        从虚拟机的角度来看，无状态的对象的临时状态都是存储在线程栈中的局部变量中的，只允许当前线程访问。而不会受其他线程的影响。另外，类信息是存储在方法区中的，是共享的。类信息中包含了类的版本、字段、类名、接口、方法等信息。类的字段信息是可变的，线程的不安全性也正是因为对共享的、可变的状态的访问无法保证其正确性而引起的。所以，无状态的对象一定是线程安全的。</p>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>​        原子性的操作是不可被中断的，即使是多个线程同时执行，也互不干扰。</p>
+<h5 id="竞态条件"><a href="#竞态条件" class="headerlink" title="竞态条件"></a>竞态条件</h5><p>​        当某个结果的正确性取决于多个线程的交替时序的时候，那么就会发生竞态条件。最常见的竞态类型就是“先检查再运行”，即通过一个可能失效的结果来决定下一步的动作。这个失效的结果可能给你带来未预期的异常，数据被覆盖的。</p>
+<p>​        “先检查后执行”的最常见的一种情况就是延迟初始化，所谓延迟初始化，就是将对象的初始化延迟到使用该对象时才进行，比如单例模式，如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Singleton singleton = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == singleton) &#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        如上的代码可能会出现多个Singleton的实例。比如线程A在进行条件判断，看到singleton为空，就会去创建实例，而此时线程B进来，也同样需要判断条件，而此时的singleton是否为null，则取决于不可预计的时序，以及线程的调度方式，所以，这两次调用getInstance( )，可能得到的实例并不是同一个实例。这就违法了单例模式了。</p>
+<p>​        另外一种常见的竞态条件，发生在“读取-修改-写入”的操作中，例如递增计数器( count++ )。在使用递增计数器的时候，你必须要先获取先前的值，然后确保在执行更新过程中不会被其他线程修改和读取这个值。</p>
+<h5 id="复合操作"><a href="#复合操作" class="headerlink" title="复合操作"></a>复合操作</h5><p>​        这是另外一个常见的竟态条件，包含了一组需要以原子方式执行的操作，也就是当前线程在修改某个变量时，必须通过某种方式来阻止其他线程来使用这个变量，从而确保其他线程只能在修改操作完成之前或之后来读取或修改这个变量。</p>
+<p>​    </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/16/environments配置环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/16/environments配置环境/" itemprop="url">environments配置环境</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-16T21:56:50+08:00">
+                2019-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/08/Mybatis的基本构成/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/08/Mybatis的基本构成/" itemprop="url">Mybatis的基本构成</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-08T22:34:39+08:00">
+                2019-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a>基本构成</h2><h3 id="SqlSessionFactoryBuilder（构造器）"><a href="#SqlSessionFactoryBuilder（构造器）" class="headerlink" title="SqlSessionFactoryBuilder（构造器）"></a>SqlSessionFactoryBuilder（构造器）</h3><p>​    根据配置信息来生成SqlSessionFacory（工厂接口）</p>
+<h3 id="SqlSessionFactory"><a href="#SqlSessionFactory" class="headerlink" title="SqlSessionFactory"></a>SqlSessionFactory</h3><p>​    是一个接口工厂接口而不是实现类，可以通过SqlSessonFactoryBuilder获得。它的任务是创建SqlSession（会话），可以说是每个Mybatis的应用的核心。</p>
+<p>​    可以通过XML配置方式或者编码方式来创建SqlSessionFactory，强烈建议使用XML配置文件的方式。</p>
+<p>​    通过解析XML配置信息到org.apache.ibatis.session.Confuguration中，这个Configuration类对象将会存在整个Mybatis的生命周期中，另外，Mybatis提供了两个SqlSessionFactory的实现类，一个是DefaultSqlSessionFactory和SqlSessionManger，不过，SqlSessionManger目前还没有使用，Mybatis目前使用的是DefaultSqlSessionFactory</p>
+<h3 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>​    一个既可以发送Sql去执行并返回结果，也可以获取Mapper的接口</p>
+<p>​    是一个接口类，扮演着门面的作用，也就是说，我们只要告诉它我们要什么信息（参数），要做什么（SQL），那么它在一段时间之后就会将结果返回给我们，在这个过程中，我们也只需要关心我们需要什么样的参数和功能，之后会返回什么样的结果给我们就可以了。而中间的处理过程对我们来说是透明的，中间的黑盒操作主要是依靠Executor来实现的。</p>
+<p>​    SQLSession有两个实现类：DefaultSqlSession、SQLSessionManger，每次在使用完SQLSession之后需要正确的进行关闭动作，将连接资源交还给数据库，以免导致资源的匮乏而导致其他问题。</p>
+<p>​    用途：</p>
+<pre><code>1. 获取映射器，让映射器通过命名空间和方法名找到对应的SQL，发送给数据库执行后返回结果
+ 2. 在SqlSession层，可以通过update、insert、delete、select等方法，带上SQL的ID来操作在XML中配置好的SQL，从而完成我们的工作
+</code></pre><h3 id="SQL-Mapper"><a href="#SQL-Mapper" class="headerlink" title="SQL Mapper"></a>SQL Mapper</h3><p>​    由一个接口和XML文件（或注解）组成，需要给出SQL和对应的映射规则，负责发送SQL去执行，并返回结果</p>
+<p>​    作用：</p>
+<pre><code>1. 定义参数类型
+ 2. 描述缓存
+ 3. 描述SQL语句
+ 4. 定义SQL返回结果和POJO的映射关系
+</code></pre><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="SqlSessionFactoryBuilder"><a href="#SqlSessionFactoryBuilder" class="headerlink" title="SqlSessionFactoryBuilder"></a>SqlSessionFactoryBuilder</h3><p>​    它可以通过XML文件或者java编码来构造SQLSessionFactory，可以构造多个SessionFactory，我们在构造完SqlSessionFactory之后，Builder也就完成了它的使命，我们就可以对其进行回收了，所以它的生命周期只需要在方法局部内就可以了。</p>
+<h3 id="SQLSessionFactory"><a href="#SQLSessionFactory" class="headerlink" title="SQLSessionFactory"></a>SQLSessionFactory</h3><p>​    每次程序需要访问数据库的时候，SqlSessionFactory就会创建出SqlSession会话，所以，SqlSessionFactory应该要贯穿于Mybatis的整个生命周期，但是，如果程序中多次创建同一个数据库的SqlSessionFactory，那么每次创建SqlSessionFactory就会打开更多的数据库连接资源，那么数据库连接资源就会很快的被耗尽。所以SqlSessionFactory果断需要配置成单例的，在整个Mybatis的生命周期中，只需要存在同一个数据库的一个SqlSessionFactory实例来管理好数据库的连接就可以了。</p>
+<h3 id="SqlSession-1"><a href="#SqlSession-1" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>​    是一个会话，相当于JDBC的一个Connection对象，它的生命周期是在请求数据库处理事务的过程中，是一个线程不安全的对象。</p>
+<h3 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h3><p>​    应该在一个SqlSession事务方法之内，是一个方法级别的东西。最大的范围是和SqlSession范围相同的。尽量在一个SqlSession中使用它</p>
+<p><img src="/2019/05/08/Mybatis的基本构成/Mybatis组件的生命周期.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/06/Mybatis配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/06/Mybatis配置/" itemprop="url">Mybatis配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T23:26:05+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-XML方式与注解方式对比"><a href="#1-XML方式与注解方式对比" class="headerlink" title="1. XML方式与注解方式对比"></a>1. XML方式与注解方式对比</h3><ol>
+<li><p>使用Mapper.xml的方式</p>
+<p>优势：和接口分离，便于统一管理； 复杂的语句不会影响接口的可读性，可以带来更灵活的空间</p>
+<p>劣势：存在较多的XML文件</p>
+</li>
+<li><p>使用注解的方式</p>
+<p>优势：在接口层就能看到对应的SQL，不需要再去查找xml文件，可读性高，较为方便</p>
+<p>劣势：如果存在较为复杂的联合查询，那么会因为SQL语句过长而影响阅读，导致可读性降低；另外，这种方式的SQL无法进行复用，也就是无法使用xml文件中的include方式。</p>
+</li>
+</ol>
+<h3 id="2-配置文件"><a href="#2-配置文件" class="headerlink" title="2. 配置文件"></a>2. 配置文件</h3><p>​    mybatis-config.xml中配置的每一个信息都可以在org.apache.ibatis.session.Configuration类中找到对应的属性，其实说白了，在xml中配置这么多的属性，就是为了组装这个Configuration的</p>
+<h6 id="属性配置"><a href="#属性配置" class="headerlink" title="属性配置"></a>属性配置</h6><p>​    mybatis的配置文件中的值可以在外部配置，可以通过配置properties文件的方式。在mybatis-config.xml中以如${ driver.class }的方式引入。</p>
+<p>​    如果在项目中多处配置了属性的值，优先级如下：</p>
+<p>​    方法参数传递的属性  –&gt;  properties resource中指定的URL文件  –&gt;  最后是properties体中指定的属性</p>
+<p>​    切记不要使用混合的方式，否则会使得代码看上去很混乱，首选的方式应该是properties文件的方式</p>
+<p>​    如果系统有对密码、用户名等进行加解密的需求，建议使用配置properties文件，然后通过代码方式来创建SqlSessionFactory的方式。</p>
+<p>​    从mybatis3.4.2开始，可以为占位符设定一个默认值，如：${username: mysql}，这里如果username没有配置的话，那么将取mysql作为参数值。如果需要使用这一特性，必须要启用默认值特性：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">"org/mybatis/example/config.properties"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"org.apache.ibatis.parsing.PropertyParser.enable-default-value"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span> <span class="comment">&lt;!-- 启用默认值特性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="设置（settings）"><a href="#设置（settings）" class="headerlink" title="设置（settings）"></a>设置（settings）</h6><p>​    是Mybatis最复杂的配置，也是Mybatis最重要的配置之一，它可以改变Mybatis运行时的行为。比如配置proxyFactory指定Mybatis创建具有延时加载能力的对象所使用到的代理工具等。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">setting</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="别名（typealias）"><a href="#别名（typealias）" class="headerlink" title="别名（typealias）"></a>别名（typealias）</h6><p>​    可以使用一个简短的名称来代替类的全限定名，这个名称可以在Mybatis的上下文中使用。别名是不区分大小写的，别名是在解析配置文件中生成，并长期保存在Configuration对象中的，在需要的时候取出来即可，这样就可以不用在运行时再创建它的实例了。</p>
+<p>​    Mybatis为我们定义好了常用的类型的别名，比如：数值、字符串、日期和集合等，这里展示部分TypeAliasRegistry中的配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">registerAlias(<span class="string">"date[]"</span>, Date[].class);</span><br><span class="line">   registerAlias(<span class="string">"decimal[]"</span>, BigDecimal[].class);</span><br><span class="line">   registerAlias(<span class="string">"bigdecimal[]"</span>, BigDecimal[].class);</span><br><span class="line">   registerAlias(<span class="string">"biginteger[]"</span>, BigInteger[].class);</span><br><span class="line">   registerAlias(<span class="string">"object[]"</span>, Object[].class);</span><br><span class="line"></span><br><span class="line">   registerAlias(<span class="string">"map"</span>, Map.class);</span><br><span class="line">   registerAlias(<span class="string">"hashmap"</span>, HashMap.class);</span><br><span class="line">   registerAlias(<span class="string">"list"</span>, List.class);</span><br><span class="line">   registerAlias(<span class="string">"arraylist"</span>, ArrayList.class);</span><br><span class="line">   registerAlias(<span class="string">"collection"</span>, Collection.class);</span><br><span class="line">   registerAlias(<span class="string">"iterator"</span>, Iterator.class);</span><br><span class="line"></span><br><span class="line">   registerAlias(<span class="string">"ResultSet"</span>, ResultSet.class);</span><br></pre></td></tr></table></figure>
+<p>​    当然也可以自定别名，通过<typealiases>标签：</typealiases></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置别名 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">"testAlias"</span> <span class="attr">type</span>=<span class="string">"com.summer.test.TestAlias"</span>&gt;</span><span class="tag">&lt;/<span class="name">typeAlias</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 通过包扫描的方式定义别名 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"com.summer.domain"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​    包扫描的方式可以配合注解的方式使用，如果没有使用Alias注解的话，也是会被扫描的，只不过是将类的首字母小写作为别名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Alias</span>(<span class="string">"role"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="typeHandler类型处理器"><a href="#typeHandler类型处理器" class="headerlink" title="typeHandler类型处理器"></a>typeHandler类型处理器</h6><p>​    Mybatis在预处理语句中( PreparedStatement )，在设置每一个参数或者从结果中取出一个值时，都会用注册了的typeHandler进行处理。</p>
+<p>​    也分为系统定义和自定义两种，但是一般来说，使用系统已经设置好的就已经可以完成大部分功能</p>
+<p>​    系统定义部分展示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">register(String.class, JdbcType.NVARCHAR, <span class="keyword">new</span> NStringTypeHandler());</span><br><span class="line">   register(String.class, JdbcType.NCHAR, <span class="keyword">new</span> NStringTypeHandler());</span><br><span class="line">   register(String.class, JdbcType.NCLOB, <span class="keyword">new</span> NClobTypeHandler());</span><br><span class="line">   register(JdbcType.CHAR, <span class="keyword">new</span> StringTypeHandler());</span><br><span class="line">   register(JdbcType.VARCHAR, <span class="keyword">new</span> StringTypeHandler());</span><br><span class="line">   register(JdbcType.CLOB, <span class="keyword">new</span> ClobTypeHandler());</span><br></pre></td></tr></table></figure>
+<h6 id="自定义typeHandler"><a href="#自定义typeHandler" class="headerlink" title="自定义typeHandler"></a>自定义typeHandler</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.epoch.mybatis.study.typehandler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.type.JdbcType;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.type.MappedJdbcTypes;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.type.MappedTypes;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.type.TypeHandler;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.CallableStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> MyStringTypeHandler</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> cjh</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/5/15 22:55</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@MappedTypes</span>(&#123;String.class&#125;)</span><br><span class="line"><span class="meta">@MappedJdbcTypes</span>(JdbcType.VARCHAR)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyStringTypeHandler</span> <span class="keyword">implements</span> <span class="title">TypeHandler</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    Logger logger = LoggerFactory.getLogger(MyStringTypeHandler.class);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setParameter</span><span class="params">(PreparedStatement ps, <span class="keyword">int</span> i, String parameter, JdbcType jdbcType)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"设置MyStringTypeHandler类型数值..."</span>);</span><br><span class="line">        ps.setString(i, parameter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResult</span><span class="params">(ResultSet rs, String columnName)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"获取MyStringTypeHandler类型数值..."</span>);</span><br><span class="line">        <span class="keyword">return</span> rs.getString(columnName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResult</span><span class="params">(ResultSet rs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"使用MyStringTypeHandler获取下标字符串"</span>);</span><br><span class="line">        <span class="keyword">return</span> rs.getString(columnIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResult</span><span class="params">(CallableStatement cs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"使用MyStringTypeHandler CallableStatement获取下标字符串"</span>);</span><br><span class="line">        <span class="keyword">return</span> cs.getString(columnIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="枚举类型typeHandler"><a href="#枚举类型typeHandler" class="headerlink" title="枚举类型typeHandler"></a>枚举类型typeHandler</h6><p>​    Mybatis为我们提供了两种类型的typeHandler：EnumTypeHandler、EnumOrdinalTypeHandler</p>
+<p>​    EnumTypeHandler：使用枚举字符串的名字作为参数传递</p>
+<p>​    EnumOrdinalTypeHandler：使用整数下标作为参数传递，是Mybatis默认的枚举类型处理器</p>
+<p>​    在更多的应用场景中，我们希望使用呢我们自己的typeHandler来处理枚举类型。比如我们在定义了Sex枚举类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.epoch.mybatis.study.enums;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> Sex</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> cjh</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/5/15 23:47</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Sex &#123;</span><br><span class="line"></span><br><span class="line">    MALE(<span class="number">1</span>, <span class="string">"男"</span>),</span><br><span class="line">    FMALE(<span class="number">2</span>, <span class="string">"女"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Sex</span><span class="params">(Integer id, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Sex <span class="title">getSex</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (id == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> MALE;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (id == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> FMALE;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之后，可以在Mybatis中添加如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">typeHandler</span> <span class="attr">handler</span>=<span class="string">"org.apache.ibatis.type.EnumOrdinalTypeHandler"</span> <span class="attr">javaType</span>=<span class="string">"com.xxx.xxx.Sex"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在resultMap中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"sex"</span> <span class="attr">property</span>=<span class="string">"sex"</span> <span class="attr">typeHandler</span>=<span class="string">"org.apache.ibatis.type.EnumOrdinalTypeHandler"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果系统提供的两个枚举类型处理器都不能满足我们的要求，我们可以通过实现TypeHandler<t>接口来自定义自己的枚举类型转换器</t></p>
+<h6 id="ObjectFactory"><a href="#ObjectFactory" class="headerlink" title="ObjectFactory"></a>ObjectFactory</h6><p>​    当Mybatis在构建一个结果返回的时候，都会使用到ObjectFactory（对象工厂）来创建一个pojo。Mybatis有自己的默认的对象工厂的实现类DefaultObjectFactory，如果我们想要定义我们自己的对象工厂，那么可以通过继承DefaultObjectFactory或者实现ObjectFactory接口来实现。然后进行如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">objectFactory</span> <span class="attr">type</span>=<span class="string">"com.summer.mybatis.MyObjectFactory"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"MyObjectFactory"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">objectFactory</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/28/类型信息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/28/类型信息/" itemprop="url">Java类型信息</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T22:03:13+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="RTTI（Run-Time-Type-Identification运行时类型识别）"><a href="#RTTI（Run-Time-Type-Identification运行时类型识别）" class="headerlink" title="RTTI（Run-Time Type Identification运行时类型识别）"></a>RTTI（Run-Time Type Identification运行时类型识别）</h3><p>​    运行时类型信息让我们可以<font color="red">在程序运行的过程中发现和使用类型信息</font></p>
+<p>​    含义：在运行时，识别一个对象的类型（所有的类型转换都是在运行时进行正确性检查的）</p>
+<h5 id="两种方式识别对象和类的信息"><a href="#两种方式识别对象和类的信息" class="headerlink" title="两种方式识别对象和类的信息"></a>两种方式识别对象和类的信息</h5><ol>
+<li>传统的RTTI</li>
+<li>反射机制</li>
+</ol>
+<h5 id="为什么需要RTTI"><a href="#为什么需要RTTI" class="headerlink" title="为什么需要RTTI"></a>为什么需要RTTI</h5><p>​    先来了解一下多态的概念</p>
+<h6 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h6><p>​    面向对象编程基本的目的是：<font color="red">让代码只操作对基类的引用</font>，这样如果要添加一个新类来扩展程序就不会影响到原来的代码。所以即使是<font color="red">通过泛化的对象引用来调用</font>，也能产生正确的行为。这就是多态。典型的例子：Shape基类有多个子类Circle、Square等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Shape&gt; shapeList = Arrays.asList(<span class="keyword">new</span> Circle(), <span class="keyword">new</span> Square());</span><br><span class="line"><span class="keyword">for</span>(Shape shape: shapeList) &#123;</span><br><span class="line">    shape.draw();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    在上面的代码中，Circle、Square会发生向上转型，在转型的过程中也失去了具体类型信息。对于shapeList来说，他们只是Shape对象。</p>
+<p>​    而当从容器中取出对象的时候，实际上他们都会被当做Object持有，只不过会自动的将结果转型Shape，这里的RTTI类型转换并不彻底，Object只转型成了Shape但是没有转型为其子类，因为在List<shape>中，我们只知道保存的都是Shape，在编译时通过java的容器和泛型来强制确保这一点，而在运行时由类型转换来确保这一点。</shape></p>
+<p>​    而接下去的事情就要交给多态了</p>
+<h6 id="class对象"><a href="#class对象" class="headerlink" title="class对象"></a>class对象</h6><p>​    Class对象给出了类型信息在运行时是如何表示的，它<font color="red">包含了与类的有关信息</font>，用来创建类的所有“常规”对象，被保存在与类名同名的一个.class文件中。Java使用Class对象来执行其RTTI</p>
+<p>​    所有的类都是在对其第一次引用时，动态的加载到JVM中的</p>
+<p>​    所以，Java程序在它开始运行之前并非完全被加载，而是在需要时动态的加载到JVM中的，而一旦一个类的Class对象被加载到内存中之后，它就会被用来创建这个类的所有对象</p>
+<h6 id="获取Class对象"><a href="#获取Class对象" class="headerlink" title="获取Class对象"></a>获取Class对象</h6><p>获取Class对象的几种方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. Class.forName(<span class="string">"XXX"</span>)；</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	a. 使用这种方式获取Class对象会导致该类被加载，前提是该类还没有被加载的情况下，使用这种方式的好处是可以不用通过对象实例来获取Class对象；</span></span><br><span class="line"><span class="comment">	b. 但是使用这种方式必须要捕获ClassNotFoundException异常，因为在编译期forName()无法对传入的字符串进行检查对应的类是否真实存在的，只能在运行时进行检查，如果不存在，则抛出异常</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">    </span><br><span class="line"><span class="number">2</span>. Student.class;	</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	a. 更简便，且更安全，因为它在编译时就会受到检查（所以也不需要置于try语句块中），根除了forName()方法的调用，也更高效了，所以建议使用这种方式来获取；</span></span><br><span class="line"><span class="comment">	b. 这种方式不仅可以应用于类，也可以应用于接口、数组以及基本数据类型;</span></span><br><span class="line"><span class="comment">	c. 这种方式触发的是类的加载阶段，在这个阶段类的创建已经完成，获取其引用并不困难，但是不会触发类的初始化过程</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="number">3</span>. obj.getClass();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	也会触发类的初始化过程</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>来看个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cjh.study.classinfo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> InitTest</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> cjh</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/5/4 16:18</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassInitialization</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> random = <span class="keyword">new</span> Random().nextInt(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用字面量方式获取Class对象</span></span><br><span class="line">        Class&lt;InitTest&gt; initTestClass = InitTest.class;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"创建InitTest引用..."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不会触发类的初始化</span></span><br><span class="line">        System.out.println(<span class="string">"InitTest compileStaticFinal = "</span> + </span><br><span class="line">                           InitTest.compileStaticFinal);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 会触发类的初始化</span></span><br><span class="line">        System.out.println(<span class="string">"InitTest nonCompileStaticFinal= "</span> + </span><br><span class="line">                           InitTest.nonCompileStaticFinal);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 会触发类的初始化</span></span><br><span class="line">        System.out.println(<span class="string">"InitTest2.staticNonFinal = "</span> + </span><br><span class="line">                           InitTest2.staticNonFinal);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class&lt;?&gt; initTest3 = 		</span><br><span class="line">                Class.forName(<span class="string">"com.cjh.study.classinfo.InitTest3"</span>);</span><br><span class="line">            </span><br><span class="line">            System.out.println(<span class="string">"创建InitTest3引用..."</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 会触发类的初始化</span></span><br><span class="line">            System.out.println(<span class="string">"InitTest3.staticNonFinal = "</span> + </span><br><span class="line">                               InitTest3.staticNonFinal);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InitTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 编译期静态常量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> compileStaticFinal = <span class="number">12</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 非编译期静态常量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> nonCompileStaticFinal = ClassInitialization.random ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"初始化 InitTest..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InitTest2</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 静态成员变量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> staticNonFinal = <span class="number">23</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"初始化 InitTest2..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InitTest3</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 静态成员变量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> staticNonFinal = <span class="number">55</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"初始化 InitTest3..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">    创建InitTest引用...</span><br><span class="line">    InitTest compileStaticFinal = <span class="number">12</span></span><br><span class="line">    初始化 InitTest...</span><br><span class="line">    InitTest nonCompileStaticFinal = <span class="number">32</span></span><br><span class="line">    初始化 InitTest2...</span><br><span class="line">    InitTest2.staticNonFinal = <span class="number">23</span></span><br><span class="line">    初始化 InitTest3...</span><br><span class="line">    创建InitTest3引用...</span><br><span class="line">    InitTest3.staticNonFinal = <span class="number">55</span></span><br></pre></td></tr></table></figure>
+<p>​    从如上的代码结果可以得出结论：</p>
+<pre><code>1. 使用字面量的方式获取Class对象不会触发类的初始化
+ 2. 访问编译期静态常量（如：InitTest.compileStaticFinal）不会触发类的初始化。这是因为&lt;font color=red&gt;编译期静态常量会通过传播优化的方式被存储到一个NotInitialization常量池中&lt;/font&gt;，如InitTest中的静态常量会被存储到NotInitialization常量池中，而之后对InitTest的常量的引用就会被转化为对NotInitialization类对自身常量池的引用，所以在编译期后，对编译期静态常量的获取都是从NotInitialization池中获取的，所以这是编译期静态常量不触发类的初始化的重要原因。
+</code></pre><h6 id="泛化的Class引用"><a href="#泛化的Class引用" class="headerlink" title="泛化的Class引用"></a>泛化的Class引用</h6><p>​    </p>
+<h6 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h6><p>​    许多需要类型转换的场景中，我们更多的是进行的强制类型转换，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal ani = <span class="keyword">new</span> Dog();</span><br><span class="line">Dog dog = (Dog) ani;</span><br></pre></td></tr></table></figure>
+<p>​    之所以可以进行强制类型转换，这完全要归功于RTTI，所有的类型转换都是在运行时进行正确性检查的，利用RTTI验证类型是否正确从而确保强制类型转换的完成，如果类型转换失败，那么将会抛出类型转换异常。</p>
+<h6 id="instanceof（RTTI的第三种形式）"><a href="#instanceof（RTTI的第三种形式）" class="headerlink" title="instanceof（RTTI的第三种形式）"></a>instanceof（RTTI的第三种形式）</h6><p>​    在进行向下的类型转换时，可以通过判断 x instanceof Animal的返回值来判定是否可以进行向下的类型转换操作。</p>
+<p>​    它的返回结果和isInstanceOf( )方法一致，如：class.isInstanceOf( obj ); isInstanceOf()是Class类Native方法，其中obj是被测试的对象或者变量，如果obj是调用这个方法的class或者接口的实例，则返回true</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/23/mybatis-generator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/23/mybatis-generator/" itemprop="url">使用mybatis-generator</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T22:05:35+08:00">
+                2019-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-generator的配置"><a href="#1-generator的配置" class="headerlink" title="1. generator的配置"></a>1. generator的配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;context id=&quot;mysqlTables&quot; targetRuntime=&quot;MyBatis3&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--是否生成注释--&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">                        connectionURL=&quot;jdbc:mysql://localhost:3306/mybatis_test&quot;</span><br><span class="line">                        userId=&quot;root&quot;</span><br><span class="line">                        password=&quot;root&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;javaTypeResolver&gt;</span><br><span class="line">            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/javaTypeResolver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--生成model类存放位置--&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.epoch.mybatis.study.domain&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaModelGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--生成映射文件存放位置--&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;com.epoch.mybatis.study.mapper&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/sqlMapGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--生成dao存放路径--&gt;</span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.epoch.mybatis.study.dao&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaClientGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--需要生成的实体类对应的表--&gt;</span><br><span class="line">        &lt;table tableName=&quot;table_02&quot;&gt;&lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-maven引入插件"><a href="#2-maven引入插件" class="headerlink" title="2. maven引入插件"></a>2. maven引入插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;plugin&gt;</span><br><span class="line">	&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">	&lt;configuration&gt;</span><br><span class="line">		&lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">		&lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">		&lt;configurationFile&gt;src/main/resources/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">	&lt;/configuration&gt;</span><br><span class="line">	&lt;executions&gt;</span><br><span class="line">		&lt;execution&gt;</span><br><span class="line">			&lt;id&gt;Generate MyBatis Artifacts&lt;/id&gt;</span><br><span class="line">			&lt;goals&gt;</span><br><span class="line">				&lt;goal&gt;generate&lt;/goal&gt;</span><br><span class="line">			&lt;/goals&gt;</span><br><span class="line">		&lt;/execution&gt;</span><br><span class="line">	&lt;/executions&gt;</span><br><span class="line">	&lt;!--这里在插件中手动加入mysql的驱动依赖，否则可能会出错，报找不到驱动包的异常--&gt;</span><br><span class="line">	&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;5.1.30&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;/dependencies&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-idea启动项配置"><a href="#3-idea启动项配置" class="headerlink" title="3. idea启动项配置"></a>3. idea启动项配置</h3><pre><code>点击导航栏中的Run -&gt; edit Configurations... -&gt; 添加maven配置，Command line输入：
+    mybatis-generator:generate -edit
+</code></pre><p><img src="/2019/04/23/mybatis-generator/generator_command.png" alt></p>
+<h3 id="4-运行效果"><a href="#4-运行效果" class="headerlink" title="4. 运行效果"></a>4. 运行效果</h3><p><img src="/2019/04/23/mybatis-generator/generator_result.png" alt></p>
+<h2 id="4-优劣势"><a href="#4-优劣势" class="headerlink" title="4. 优劣势"></a>4. 优劣势</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>可以自动的生成代码，使用XXXExample的方式，可以不用自己写SQL</p>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>这会导致如果滥用的话，导致索引设计不好设计，建立好的索引会因为使用不当而导致索引失效，出现问题之后无法快速定位到问题</p>
+<p>所以是否使用Example的方式需要慎重</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/22/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -414,7 +1493,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -425,7 +1504,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -436,7 +1515,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

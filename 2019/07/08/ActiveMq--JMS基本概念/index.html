@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ActiveMq,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JMS是什么​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术 JMS规范​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq JMS Provider​        实现了JMS接口和规范的消息中间件 JMS Message">
+<meta name="keywords" content="ActiveMq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ActiveMq--JMS基本概念">
+<meta property="og:url" content="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/index.html">
+<meta property="og:site_name" content="Summer_wind&#39;s Blog">
+<meta property="og:description" content="JMS是什么​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术 JMS规范​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq JMS Provider​        实现了JMS接口和规范的消息中间件 JMS Message">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/assets/topic.png">
+<meta property="og:updated_time" content="2019-07-09T14:59:47.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ActiveMq--JMS基本概念">
+<meta name="twitter:description" content="JMS是什么​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术 JMS规范​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq JMS Provider​        实现了JMS接口和规范的消息中间件 JMS Message">
+<meta name="twitter:image" content="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/assets/topic.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Ecpoch'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/">
+
+
+
+
+
+  <title>ActiveMq--JMS基本概念 | Summer_wind's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Summer_wind's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ActiveMq--JMS基本概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-08T22:13:08+08:00">
+                2019-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ActiveMq/" itemprop="url" rel="index">
+                    <span itemprop="name">ActiveMq</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="JMS是什么"><a href="#JMS是什么" class="headerlink" title="JMS是什么"></a>JMS是什么</h3><p>​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术</p>
+<h3 id="JMS规范"><a href="#JMS规范" class="headerlink" title="JMS规范"></a>JMS规范</h3><p>​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq</p>
+<h3 id="JMS-Provider"><a href="#JMS-Provider" class="headerlink" title="JMS Provider"></a>JMS Provider</h3><p>​        实现了JMS接口和规范的消息中间件</p>
+<h3 id="JMS-Message"><a href="#JMS-Message" class="headerlink" title="JMS Message"></a>JMS Message</h3><p>​        JMS的消息，由三部分组成：1. 消息头  2. 消息属性  3. 消息体（具体的消息数据）</p>
+<h3 id="JMS-Producer"><a href="#JMS-Producer" class="headerlink" title="JMS  Producer"></a>JMS  Producer</h3><p>​        消息生产者，创建和发送JMS消息的客户端应用</p>
+<h3 id="JMS-Consumer"><a href="#JMS-Consumer" class="headerlink" title="JMS Consumer"></a>JMS Consumer</h3><p>​        消息消费者，是接收和处理JMS消息的客户端应用    </p>
+<p>​        消费者有两种消费方式：</p>
+<p>​    1. 同步消费：消费者通过调用receive方法，从队列中显示的提取消息，如果队列中没有消息到达，那么receive方法会阻塞，直到消息到达</p>
+<pre><code>2. 异步消费：消费者向消息中间件注册一个消息监听器，定义当有消息到达的时候应当采取的动作，这样，当有消息到达的时候，消息中间件通过回调的方式来处理    
+</code></pre><h3 id="JMS-domains"><a href="#JMS-domains" class="headerlink" title="JMS domains"></a>JMS domains</h3><p>​        消息传递域，JMS规范中定义了两种消息传递域：点对点（Point To Point 简称P2P）、发布/订阅(Pub / Sub)</p>
+<ol>
+<li><p>点对点的特点：</p>
+<ul>
+<li>每个消息只能有一个消费者，注意，这里说的是每个消息，而不是每一个队列，一个队列是可以有多个消费者的</li>
+<li>消息的生产者和消费者之前没有时间上的相关性，也就是说，无论消费者在生产者发送消息的时候是否是处于运行状态的，他都可以消费消息</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>Pub / Sub 的特点：</p>
+<ul>
+<li>每个消息可以用多个消费者（ 这里针对的还是消息 ）</li>
+<li>生产者和消费者之间是有时间上的相关性的。订阅一个主题的消费者只能消费到从它开始订阅之后生产者所发送的消息，而在订阅之前的消息是接收不到的。但是，JMS规范是可以允许客户端创建持久订阅的，这样消费者依然可以消费在自身未激活状态下的生产者发送的消息</li>
+</ul>
+</li>
+<li><p>在P2P中，消息的destination被称之为Queue ，而在Pub / Sub 中则被称之为Topic</p>
+<p><img src="/2019/07/08/ActiveMq--JMS基本概念/assets/topic.png" alt></p>
+</li>
+</ol>
+<h3 id="JMS的消息结构"><a href="#JMS的消息结构" class="headerlink" title="JMS的消息结构"></a>JMS的消息结构</h3><p>​        JMS消息由三部分组成：消息头、属性和消息体</p>
+<h5 id="JMS消息头"><a href="#JMS消息头" class="headerlink" title="JMS消息头"></a>JMS消息头</h5><ul>
+<li><p>JMS Destination</p>
+<p>消息发送的目的地，主要就是Queue或者Topic，在创建队列或者topic的时候会自动分配</p>
+</li>
+<li><p>JMS DeliveryMode</p>
+<p>消息的传递模式，分为两种：持久模式和非持久模式，一条持久的消息只能被传送一次且仅有一次，当中间件发生故障的时候，这条消息并不会丢失，会在服务器恢复之后继续传递；一条非持久模式的消息最多会传递一次，当服务器发生故障的时候，这条消息会发生丢失</p>
+</li>
+<li><p>JMS Expiration</p>
+<p>消息的过期时间，等于发送消息时设置的timeToLive值加上发送时刻的GMT时间值，如果 timeToLive的值为0，则表示该消息永不过期，直到等到消费者来消费。如果在设置了过期时间后，消息在指定的过期时间内没有发送到目的地，那么该条消息将会被清除，默认是0</p>
+</li>
+<li><p>JMSPriority</p>
+<p>消息的优先级，有十个优先级，0–4表示普通消息，5–9表示加急消息，JMS不要求中间件一定要按照这十个优先级来发送消息，但是要保证加急消息一定要在普通消息到达之前到达，默认值是4</p>
+</li>
+<li><p>JMS MessageID</p>
+<p>消息的标识ID，由JMS Provider产生，自动分配</p>
+</li>
+<li><p>JMS ReplyTo</p>
+<p>提供本消息的回复消息的地址，由开发者设置，通过这个设置，可以在消费者消费消息之后给出一个应答，也就是在消息投递之后消费者消费的反馈</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ActiveMq/" rel="tag"># ActiveMq</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/01/走进Kafka/" rel="next" title="走进Kafka">
+                <i class="fa fa-chevron-left"></i> 走进Kafka
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/10/ActiveMq问题汇总/" rel="prev" title="ActiveMq问题汇总">
+                ActiveMq问题汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://example.com/avatar.png" alt="chen_jianhui">
+            
+              <p class="site-author-name" itemprop="name">chen_jianhui</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS是什么"><span class="nav-number">1.</span> <span class="nav-text">JMS是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS规范"><span class="nav-number">2.</span> <span class="nav-text">JMS规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS-Provider"><span class="nav-number">3.</span> <span class="nav-text">JMS Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS-Message"><span class="nav-number">4.</span> <span class="nav-text">JMS Message</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS-Producer"><span class="nav-number">5.</span> <span class="nav-text">JMS  Producer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS-Consumer"><span class="nav-number">6.</span> <span class="nav-text">JMS Consumer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS-domains"><span class="nav-number">7.</span> <span class="nav-text">JMS domains</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS的消息结构"><span class="nav-number">8.</span> <span class="nav-text">JMS的消息结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JMS消息头"><span class="nav-number">8.0.1.</span> <span class="nav-text">JMS消息头</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chen_jianhui</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -247,6 +247,1145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/10/ActiveMq问题汇总/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/10/ActiveMq问题汇总/" itemprop="url">ActiveMq问题汇总</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-10T23:00:25+08:00">
+                2019-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ActiveMq/" itemprop="url" rel="index">
+                    <span itemprop="name">ActiveMq</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="启动失败"><a href="#启动失败" class="headerlink" title="启动失败"></a>启动失败</h3><ol>
+<li><p>bin目录下执行./activemq start，mq未正常启动</p>
+</li>
+<li><p>执行./activemq console，查看出错信息</p>
+<p><img src="/2019/07/10/ActiveMq问题汇总/assets/start_faile.png" alt></p>
+<ol start="3">
+<li><p>从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了</p>
+</li>
+<li><p>执行命令：lsof -i:5672，查看端口占用情况</p>
+</li>
+</ol>
+<p><img src="/2019/07/10/ActiveMq问题汇总/assets/port_used-1562771218541.png" alt></p>
+<ol start="5">
+<li><p>可以看出，rabbitmq占用了该端口</p>
+</li>
+<li><p>修改activemq/conf目录下的activemq.xml中amqp对应的端口，重新启动即可</p>
+</li>
+</ol>
+<p><img src="/2019/07/10/ActiveMq问题汇总/assets/port_edit.png" alt></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/08/ActiveMq--JMS基本概念/" itemprop="url">ActiveMq--JMS基本概念</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-08T22:13:08+08:00">
+                2019-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ActiveMq/" itemprop="url" rel="index">
+                    <span itemprop="name">ActiveMq</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="JMS是什么"><a href="#JMS是什么" class="headerlink" title="JMS是什么"></a>JMS是什么</h3><p>​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术</p>
+<h3 id="JMS规范"><a href="#JMS规范" class="headerlink" title="JMS规范"></a>JMS规范</h3><p>​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq</p>
+<h3 id="JMS-Provider"><a href="#JMS-Provider" class="headerlink" title="JMS Provider"></a>JMS Provider</h3><p>​        实现了JMS接口和规范的消息中间件</p>
+<h3 id="JMS-Message"><a href="#JMS-Message" class="headerlink" title="JMS Message"></a>JMS Message</h3><p>​        JMS的消息，由三部分组成：1. 消息头  2. 消息属性  3. 消息体（具体的消息数据）</p>
+<h3 id="JMS-Producer"><a href="#JMS-Producer" class="headerlink" title="JMS  Producer"></a>JMS  Producer</h3><p>​        消息生产者，创建和发送JMS消息的客户端应用</p>
+<h3 id="JMS-Consumer"><a href="#JMS-Consumer" class="headerlink" title="JMS Consumer"></a>JMS Consumer</h3><p>​        消息消费者，是接收和处理JMS消息的客户端应用    </p>
+<p>​        消费者有两种消费方式：</p>
+<p>​    1. 同步消费：消费者通过调用receive方法，从队列中显示的提取消息，如果队列中没有消息到达，那么receive方法会阻塞，直到消息到达</p>
+<pre><code>2. 异步消费：消费者向消息中间件注册一个消息监听器，定义当有消息到达的时候应当采取的动作，这样，当有消息到达的时候，消息中间件通过回调的方式来处理    
+</code></pre><h3 id="JMS-domains"><a href="#JMS-domains" class="headerlink" title="JMS domains"></a>JMS domains</h3><p>​        消息传递域，JMS规范中定义了两种消息传递域：点对点（Point To Point 简称P2P）、发布/订阅(Pub / Sub)</p>
+<ol>
+<li><p>点对点的特点：</p>
+<ul>
+<li>每个消息只能有一个消费者，注意，这里说的是每个消息，而不是每一个队列，一个队列是可以有多个消费者的</li>
+<li>消息的生产者和消费者之前没有时间上的相关性，也就是说，无论消费者在生产者发送消息的时候是否是处于运行状态的，他都可以消费消息</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>Pub / Sub 的特点：</p>
+<ul>
+<li>每个消息可以用多个消费者（ 这里针对的还是消息 ）</li>
+<li>生产者和消费者之间是有时间上的相关性的。订阅一个主题的消费者只能消费到从它开始订阅之后生产者所发送的消息，而在订阅之前的消息是接收不到的。但是，JMS规范是可以允许客户端创建持久订阅的，这样消费者依然可以消费在自身未激活状态下的生产者发送的消息</li>
+</ul>
+</li>
+<li><p>在P2P中，消息的destination被称之为Queue ，而在Pub / Sub 中则被称之为Topic</p>
+<p><img src="/2019/07/08/ActiveMq--JMS基本概念/assets/topic.png" alt></p>
+</li>
+</ol>
+<h3 id="JMS的消息结构"><a href="#JMS的消息结构" class="headerlink" title="JMS的消息结构"></a>JMS的消息结构</h3><p>​        JMS消息由三部分组成：消息头、属性和消息体</p>
+<h5 id="JMS消息头"><a href="#JMS消息头" class="headerlink" title="JMS消息头"></a>JMS消息头</h5><ul>
+<li><p>JMS Destination</p>
+<p>消息发送的目的地，主要就是Queue或者Topic，在创建队列或者topic的时候会自动分配</p>
+</li>
+<li><p>JMS DeliveryMode</p>
+<p>消息的传递模式，分为两种：持久模式和非持久模式，一条持久的消息只能被传送一次且仅有一次，当中间件发生故障的时候，这条消息并不会丢失，会在服务器恢复之后继续传递；一条非持久模式的消息最多会传递一次，当服务器发生故障的时候，这条消息会发生丢失</p>
+</li>
+<li><p>JMS Expiration</p>
+<p>消息的过期时间，等于发送消息时设置的timeToLive值加上发送时刻的GMT时间值，如果 timeToLive的值为0，则表示该消息永不过期，直到等到消费者来消费。如果在设置了过期时间后，消息在指定的过期时间内没有发送到目的地，那么该条消息将会被清除，默认是0</p>
+</li>
+<li><p>JMSPriority</p>
+<p>消息的优先级，有十个优先级，0–4表示普通消息，5–9表示加急消息，JMS不要求中间件一定要按照这十个优先级来发送消息，但是要保证加急消息一定要在普通消息到达之前到达，默认值是4</p>
+</li>
+<li><p>JMS MessageID</p>
+<p>消息的标识ID，由JMS Provider产生，自动分配</p>
+</li>
+<li><p>JMS ReplyTo</p>
+<p>提供本消息的回复消息的地址，由开发者设置，通过这个设置，可以在消费者消费消息之后给出一个应答，也就是在消息投递之后消费者消费的反馈</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/01/走进Kafka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/01/走进Kafka/" itemprop="url">走进Kafka</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-01T22:24:02+08:00">
+                2019-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/消息系统/" itemprop="url" rel="index">
+                    <span itemprop="name">消息系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="KafKa的设计目标"><a href="#KafKa的设计目标" class="headerlink" title="KafKa的设计目标"></a>KafKa的设计目标</h3><ul>
+<li><h4 id="高吞吐率"><a href="#高吞吐率" class="headerlink" title="高吞吐率"></a>高吞吐率</h4><p>在廉价的商用机器上单机可以支持每秒100万条消息的读写</p>
+</li>
+<li><h4 id="消息持久化"><a href="#消息持久化" class="headerlink" title="消息持久化"></a>消息持久化</h4><p>所有消息均被持久化到磁盘上，无消息丢失，支持消息重放</p>
+</li>
+<li><h4 id="完全分布式"><a href="#完全分布式" class="headerlink" title="完全分布式"></a>完全分布式</h4><p>Producer、Broker、Consumer均支持水平扩展</p>
+</li>
+<li><h4 id="同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）"><a href="#同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）" class="headerlink" title="同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）"></a>同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）</h4></li>
+</ul>
+<h3 id="KafKa的安装"><a href="#KafKa的安装" class="headerlink" title="KafKa的安装"></a>KafKa的安装</h3><ul>
+<li>下载地址：<a href="http://kafka.apache.org/downloads.html" target="_blank" rel="noopener">http://kafka.apache.org/downloads.html</a></li>
+<li>进入到bin目录下启动zookeeper：sh zookeeper-server-start.sh ../config/zookeeper.properties</li>
+<li>bin目录下启动kafka：sh kafka-server-start.sh ../config/server.properties</li>
+</ul>
+<h4 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h4><ul>
+<li>创建topic：sh kafka-topics.sh –zookeeper localhost:2182 –create –topic test1 –partitions 3 –replication-factor 1</li>
+<li>查看topic描述：sh kafka-topics.sh –zookeeper localhost:2182 –descripe –topic test1</li>
+<li>订阅消息：bin/kafka-console-consumer.sh –bootstrap-server 127.0.0.1:2182 –topic test1</li>
+</ul>
+<p>​    </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/30/Kafka简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/30/Kafka简介/" itemprop="url">消息系统简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-30T22:33:56+08:00">
+                2019-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/消息系统/" itemprop="url" rel="index">
+                    <span itemprop="name">消息系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="消息系统分类"><a href="#消息系统分类" class="headerlink" title="消息系统分类"></a>消息系统分类</h3><h4 id="Peer-to-Peer（点对点，往往是单播）"><a href="#Peer-to-Peer（点对点，往往是单播）" class="headerlink" title="Peer-to-Peer（点对点，往往是单播）"></a>Peer-to-Peer（点对点，往往是单播）</h4><ul>
+<li><p>一般基于pull或者polling接收消息</p>
+</li>
+<li><p>发送队列中的消息被一个且只有一个接收者所接收，即使有多个消费者在监听同一个队列</p>
+</li>
+<li><p>既可以支持异步“ 即发即弃 ”的消息发送方式，也可以支持同步请求/应答的消息发送方式（即等到消费者成功返回之后再发送下一条消息）</p>
+</li>
+</ul>
+<h4 id="发布-订阅"><a href="#发布-订阅" class="headerlink" title="发布/订阅"></a>发布/订阅</h4><ul>
+<li><p>发布到一个主题的消息，可以被多个订阅者接收</p>
+</li>
+<li><p>发布/订阅即可基于Push消费数据，也可以基于Pull或者Pollinig的方式消费数据</p>
+</li>
+<li><p>解耦能力比P2P模式更强</p>
+</li>
+</ul>
+<h4 id="KafKa消息系统类型"><a href="#KafKa消息系统类型" class="headerlink" title="KafKa消息系统类型"></a>KafKa消息系统类型</h4><p>​        kafka是同时支持单播和多播的，kafka可以有不同的consumer-group，kafka支持不同消费者组之间的多播，每个consumer-group都会有consumer接收这条消息，也支持在group中的单播，在group中只会有一个consumer消费这条消息。</p>
+<h3 id="消息系统的适用场景"><a href="#消息系统的适用场景" class="headerlink" title="消息系统的适用场景"></a>消息系统的适用场景</h3><ul>
+<li><h4 id="解耦"><a href="#解耦" class="headerlink" title="解耦"></a>解耦</h4><p>各个系统之间通过消息系统这个统一的接口交换数据，不用关心有哪些系统需要处理以及如何处理这条消息。</p>
+</li>
+<li><h4 id="冗余"><a href="#冗余" class="headerlink" title="冗余"></a>冗余</h4><p>部分消息系统具有消息持久化的能力（如KafKa），可以规避消息处理前丢失的风险</p>
+</li>
+<li><h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>消息系统是统一的数据接口，各系统可以独立扩展，不需要感知彼此间的变化</p>
+</li>
+<li><h4 id="峰值处理能力"><a href="#峰值处理能力" class="headerlink" title="峰值处理能力"></a>峰值处理能力</h4><p>消息系统可以顶住峰值流量，系统可以根据自身的处理能力从消息系统中获取定量的请求进行处理，这样就可以在流量高峰期不会导致系统崩溃，也不会因为为了要应对流量高峰期而升级所带来的资源的浪费</p>
+</li>
+<li><h4 id="可恢复性"><a href="#可恢复性" class="headerlink" title="可恢复性"></a>可恢复性</h4><p>系统中部分组件失效并不会影响整个系统，当它恢复后仍可以从消息系统中获取消息进行处理</p>
+</li>
+<li><h4 id="异步通信"><a href="#异步通信" class="headerlink" title="异步通信"></a>异步通信</h4><p>在不需要立即对请求做出处理时，可以将请求放入到消息系统中，在适当的时候从消息系统中取出再进行处理</p>
+</li>
+</ul>
+<h3 id="常用消息系统对比"><a href="#常用消息系统对比" class="headerlink" title="常用消息系统对比"></a>常用消息系统对比</h3><ul>
+<li><h4 id="RabbitMq"><a href="#RabbitMq" class="headerlink" title="RabbitMq"></a>RabbitMq</h4><p>基于Erlang编写的，支持多协议：AMQP（语言无关）, XMPP, SMTP, STOMP,支持负载均衡，数据持久化，同时支持P2P和发布/订阅模式，但是比较的重量级，适合在较为重量型的企业应用中</p>
+</li>
+<li><h4 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h4><p>支持MQ功能，可以做轻量级队列服务使用，就入队而言，Redis对于短消息（小于10KB）的性能要比RabbitMq好，但是长消息的性能比RabbitMq差</p>
+</li>
+<li><h4 id="ActiveMq"><a href="#ActiveMq" class="headerlink" title="ActiveMq"></a>ActiveMq</h4><p>JMS实现，P2P点对点模式，支持持久化，支持XA事务</p>
+</li>
+<li><h4 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h4><p>高性能跨语言的分布式发布/订阅消息系统，支持数据持久化，全分布式，同时支持在线和离线的处理</p>
+</li>
+<li><h4 id="RocketMq"><a href="#RocketMq" class="headerlink" title="RocketMq"></a>RocketMq</h4><p>纯Java实现，发布/订阅消息系统，支持本地事务和分布式XA事务</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/24/线程安全的单例模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/24/线程安全的单例模式/" itemprop="url">线程安全的单例模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-24T22:30:18+08:00">
+                2019-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncSingleton01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SyncSingleton01 singleton01 = <span class="keyword">new</span> SyncSingleton01();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SyncSingleton01</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SyncSingleton01 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> singleton01;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        这种方式虽然可以实现线程安全的单例模式，但是如果一个系统中这样的类存在较多的话，会拖慢系统启动的速度，所以，一般会使用延迟加载，在第一次使用的时候才初始化。</p>
+<h5 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a>第二种：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncSingleton02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SyncSingleton02 singleton02 = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SyncSingleton02</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SyncSingleton02 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == singleton02) &#123;</span><br><span class="line">            singleton02 = <span class="keyword">new</span> SyncSingleton02();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton02;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        这种方法锁的粒度比较大，而且在后面的每次获取这个对象的时候，都要进行上锁，效率自然也会是比较低的。</p>
+<h5 id="第三种："><a href="#第三种：" class="headerlink" title="第三种："></a>第三种：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncSingleton03</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SyncSingleton03 singleton03 = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SyncSingleton03</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SyncSingleton03 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == singleton03) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (SyncSingleton03.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> == singleton03) &#123;</span><br><span class="line">                    singleton03 = <span class="keyword">new</span> SyncSingleton03();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton03;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        这种方法采用了双重锁机制对第二种做了修改，减小了锁的粒度，在第一次调用之后，在获取对象的时候不需要再进行上锁。</p>
+<h5 id="第四种："><a href="#第四种：" class="headerlink" title="第四种："></a>第四种：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncSingleton04</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SyncSingleton04</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> SyncSingleton04 singleton04 = <span class="keyword">new</span> SyncSingleton04();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SyncSingleton04 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Inner.singleton04;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        这种方式采用了无锁内部类的形式，也实现了懒加载，是较为优秀的实现方式。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/19/线程局部变量ThreadLocal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/19/线程局部变量ThreadLocal/" itemprop="url">线程局部变量ThreadLocal</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T23:51:25+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>​        使用了ThreadLocal之后，当前线程修改的值不会影响其他线程中该变量的值，也就是说这部分数据只会存在线程的独占区中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocal01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> ThreadLocal&lt;Integer&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.SECONDS.sleep(<span class="number">2L</span>);</span><br><span class="line">                System.out.println(threadLocal.get());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"c2"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">                threadLocal.set(<span class="number">10</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"c1"</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        这里虽然线程c1修改了threadlocal的值，但是c2线程获取到的还是null。</p>
+<h3 id="ThreadLocal的内存泄漏问题"><a href="#ThreadLocal的内存泄漏问题" class="headerlink" title="ThreadLocal的内存泄漏问题"></a>ThreadLocal的内存泄漏问题</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/19/锁面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/19/锁面试题/" itemprop="url">锁面试题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T22:58:57+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​        题：创建一个固定容量的同步容器，拥有put和get以及getCount方法,支持2个生产者线程和10个消费者线程阻塞调用</p>
+<h3 id="使用synchronized"><a href="#使用synchronized" class="headerlink" title="使用synchronized"></a>使用synchronized</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Question01</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> LinkedList&lt;T&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (list.size() == MAX) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        list.add(t);</span><br><span class="line">        ++count;</span><br><span class="line">        <span class="keyword">this</span>.notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">0</span> == list.size()) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        T t = list.removeFirst();</span><br><span class="line">        --count;</span><br><span class="line">        <span class="keyword">this</span>.notifyAll();</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Question01&lt;String&gt; question01 = <span class="keyword">new</span> Question01&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; j++) &#123;</span><br><span class="line">                    System.out.println(question01.get());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="string">"c"</span> + i).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">25</span>; j++) &#123;</span><br><span class="line">                    question01.put(Thread.currentThread().getName() + <span class="string">" "</span> + j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="string">"p"</span> + i).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        这里有两个需要注意的地方，一个是判断的时候是使用的while循环判断，另一个唤醒线程使用的是notifyAll而不是notify。</p>
+<p>​        原因：1. 这里之所以不能使用 if 判断的原因是，如果有多个生产者线程同时进入等待状态，此时消费者线程消费了数据，使用notifyAll唤醒所有的生产者线程，从等待的地方开始继续往下执行。假设此时 list 的size已经等于MAX - 1了，但是仍然有两个或者多个生产者线程处于等待状态，那么当其中的任何一个获得锁执行完之后，此时的list的长度已经达到最大值，那么当其他的线程获得锁，继续往下执行的时候，如果此时的判断是if (list.size() == MAX) 那么线程不会再次判断，而是直接执行list.add(t); 往list中添加数据，那么此时肯定会超过最大值了。而如果使用的是while的话，那么从wait的地方继续执行后面的代码的时候，还会再次进行判断，这样就不会超出最大容量了。所以，当使用wait的使用，99.9%的情况都是与while一同使用的。</p>
+<p>​        原因：2. 如果使用的是notify的话，假如现在是生产者调用了notify，那么它不能保证它唤醒的一定是消费者线程，也有可能是生产者线程，如果唤醒的是生产者线程，那么又会进入到wait状态。</p>
+<h3 id="使用ReentrantLock的方式"><a href="#使用ReentrantLock的方式" class="headerlink" title="使用ReentrantLock的方式"></a>使用ReentrantLock的方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Question02</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> LinkedList&lt;T&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">    <span class="keyword">private</span> Condition producer = lock.newCondition();</span><br><span class="line">    <span class="keyword">private</span> Condition consumer = lock.newCondition();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            <span class="keyword">while</span> (list.size() == MAX) &#123;</span><br><span class="line">                producer.await();</span><br><span class="line">            &#125;</span><br><span class="line">            list.add(t);</span><br><span class="line">            count++;</span><br><span class="line">            consumer.signalAll();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        T t = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            <span class="keyword">while</span> (list.size() == <span class="number">0</span>) &#123;</span><br><span class="line">                consumer.await();</span><br><span class="line">            &#125;</span><br><span class="line">            t = list.removeFirst();</span><br><span class="line">            count--;</span><br><span class="line">            producer.signalAll();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Question02&lt;String&gt; question01 = <span class="keyword">new</span> Question02&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; j++) &#123;</span><br><span class="line">                    System.out.println(question01.get());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="string">"c"</span> + i).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">25</span>; j++) &#123;</span><br><span class="line">                    question01.put(Thread.currentThread().getName() + <span class="string">" "</span> + j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="string">"p"</span> + i).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        使用ReentrantLock的方式，可以精确指定哪些线程被唤醒，这样的效率明显是比synchronized效率要高的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/16/重入锁ReentrantLock/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -344,6 +1483,8 @@
 <h3 id="尝试锁定"><a href="#尝试锁定" class="headerlink" title="尝试锁定"></a>尝试锁定</h3><p>​        使用ReentrantLock可以进行尝试锁定，这样在无法锁定或者在指定时间内无法锁定，线程可以决定是否继续等待。在尝试锁定之后，不管有没有锁定，方法都将继续执行。所以，可以在方法中根据是否锁定来进行相应的逻辑处理。</p>
 <h3 id="获取不到锁可被interrupt"><a href="#获取不到锁可被interrupt" class="headerlink" title="获取不到锁可被interrupt"></a>获取不到锁可被interrupt</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lock02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m1</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            System.out.println(<span class="string">"t1 start"</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);</span><br><span class="line">            System.out.println(<span class="string">"t1 end"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"t1 interrupted"</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> isLock = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"><span class="comment">//            lock.lock();</span></span><br><span class="line">            lock.lockInterruptibly();</span><br><span class="line">            isLock = lock.tryLock();</span><br><span class="line">            System.out.println(<span class="string">"t2 start"</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">            System.out.println(<span class="string">"t2 end"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"t2 interrupted"</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (isLock) &#123;</span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Lock02 lock01 = <span class="keyword">new</span> Lock02();</span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                lock01.m1();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        t1.start();</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                lock01.m2();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        t2.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        t2.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    	控制台输出：</span></span><br><span class="line"><span class="comment">    	t1 start</span></span><br><span class="line"><span class="comment">		t2 interrupted</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>​        线程t1在Integer.MAX_VALUE的时间内会一直执行，正常情况下t2是获取不到锁的，这个时候如果不做处理，那么t2将会一直等待下去，不会被其他线程打断。但是如果在t2中调用了lock.lockInterruptibly();方法之后，则表明t2是可以被打断的。也就是说，t2在等待t1释放锁的过程中，如果不想继续等了，主线程调用t2.interrupt()方法即可将t2线程打断。</p>
+<h3 id="指定为公平锁"><a href="#指定为公平锁" class="headerlink" title="指定为公平锁"></a>指定为公平锁</h3><p>​        假如现在有6个线程，其中一个线程拿到了锁顺利执行完逻辑后释放了锁，这时候剩下的5个线程都会去争用这把锁，谁先拿到就是谁的，谁就可以执行，并不会关心其他的线程等了多长的时间，也就是说不会根据谁等的时间长，谁就优先获得锁。这种称为竞争锁，不是公平锁。这种的效率会高些，因为线程调度器不用计算哪个线程等待的时间更长。synchronized默认是非公平锁。</p>
+<p>​        公平锁自然就是根据等待时间来判断谁可以先获取到锁的。new ReentrantLock(true)即可声明为公平锁。</p>
 
           
         
@@ -701,1085 +1842,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/08/Mybatis实用以及问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/08/Mybatis实用以及问题/" itemprop="url">Mybatis实用以及问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-08T21:33:50+08:00">
-                2019-06-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/25/线程安全性/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/25/线程安全性/" itemprop="url">线程安全性</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-25T18:12:17+08:00">
-                2019-05-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/并发编程/" itemprop="url" rel="index">
-                    <span itemprop="name">并发编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>​        要编写线程安全的代码，核心是<font color="red">对状态访问操作进行管理，尤其是那些可变的、共享的状态的访问</font>，而对象的状态可以理解为存储在状态变量（实例或静态域）中的数据，当然对象的状态还可能会包含其他依赖对象的域。</p>
-<h3 id="什么是线程安全性"><a href="#什么是线程安全性" class="headerlink" title="什么是线程安全性"></a>什么是线程安全性</h3><p>​        当多个线程访问一个类时，不管运行时采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步和协同，这个类始终都能表现出正确的行为，那么这个类就称作是线程安全的。</p>
-<p>​        无状态对象一定是线程安全的（不包含任何域也不包含任何引用对象的域），比如大多数的Servlet都是无状态的，只有当Servlet在处理一些请求需要保存数据时，才不是线程安全的。</p>
-<p>​        从虚拟机的角度来看，无状态的对象的临时状态都是存储在线程栈中的局部变量中的，只允许当前线程访问。而不会受其他线程的影响。另外，类信息是存储在方法区中的，是共享的。类信息中包含了类的版本、字段、类名、接口、方法等信息。类的字段信息是可变的，线程的不安全性也正是因为对共享的、可变的状态的访问无法保证其正确性而引起的。所以，无状态的对象一定是线程安全的。</p>
-<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>​        原子性的操作是不可被中断的，即使是多个线程同时执行，也互不干扰。</p>
-<h5 id="竞态条件"><a href="#竞态条件" class="headerlink" title="竞态条件"></a>竞态条件</h5><p>​        当某个结果的正确性取决于多个线程的交替时序的时候，那么就会发生竞态条件。最常见的竞态类型就是“先检查再运行”，即通过一个可能失效的结果来决定下一步的动作。这个失效的结果可能给你带来未预期的异常，数据被覆盖的。</p>
-<p>​        “先检查后执行”的最常见的一种情况就是延迟初始化，所谓延迟初始化，就是将对象的初始化延迟到使用该对象时才进行，比如单例模式，如下代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Singleton singleton = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == singleton) &#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>​        如上的代码可能会出现多个Singleton的实例。比如线程A在进行条件判断，看到singleton为空，就会去创建实例，而此时线程B进来，也同样需要判断条件，而此时的singleton是否为null，则取决于不可预计的时序，以及线程的调度方式，所以，这两次调用getInstance( )，可能得到的实例并不是同一个实例。这就违法了单例模式了。</p>
-<p>​        另外一种常见的竞态条件，发生在“读取-修改-写入”的操作中，例如递增计数器( count++ )。在使用递增计数器的时候，你必须要先获取先前的值，然后确保在执行更新过程中不会被其他线程修改和读取这个值。</p>
-<h5 id="复合操作"><a href="#复合操作" class="headerlink" title="复合操作"></a>复合操作</h5><p>​        这是另外一个常见的竟态条件，包含了一组需要以原子方式执行的操作，也就是当前线程在修改某个变量时，必须通过某种方式来阻止其他线程来使用这个变量，从而确保其他线程只能在修改操作完成之前或之后来读取或修改这个变量。</p>
-<p>​    </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/16/environments配置环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/16/environments配置环境/" itemprop="url">environments配置环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-16T21:56:50+08:00">
-                2019-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/08/Mybatis的基本构成/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/08/Mybatis的基本构成/" itemprop="url">Mybatis的基本构成</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-08T22:34:39+08:00">
-                2019-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a>基本构成</h2><h3 id="SqlSessionFactoryBuilder（构造器）"><a href="#SqlSessionFactoryBuilder（构造器）" class="headerlink" title="SqlSessionFactoryBuilder（构造器）"></a>SqlSessionFactoryBuilder（构造器）</h3><p>​    根据配置信息来生成SqlSessionFacory（工厂接口）</p>
-<h3 id="SqlSessionFactory"><a href="#SqlSessionFactory" class="headerlink" title="SqlSessionFactory"></a>SqlSessionFactory</h3><p>​    是一个接口工厂接口而不是实现类，可以通过SqlSessonFactoryBuilder获得。它的任务是创建SqlSession（会话），可以说是每个Mybatis的应用的核心。</p>
-<p>​    可以通过XML配置方式或者编码方式来创建SqlSessionFactory，强烈建议使用XML配置文件的方式。</p>
-<p>​    通过解析XML配置信息到org.apache.ibatis.session.Confuguration中，这个Configuration类对象将会存在整个Mybatis的生命周期中，另外，Mybatis提供了两个SqlSessionFactory的实现类，一个是DefaultSqlSessionFactory和SqlSessionManger，不过，SqlSessionManger目前还没有使用，Mybatis目前使用的是DefaultSqlSessionFactory</p>
-<h3 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>​    一个既可以发送Sql去执行并返回结果，也可以获取Mapper的接口</p>
-<p>​    是一个接口类，扮演着门面的作用，也就是说，我们只要告诉它我们要什么信息（参数），要做什么（SQL），那么它在一段时间之后就会将结果返回给我们，在这个过程中，我们也只需要关心我们需要什么样的参数和功能，之后会返回什么样的结果给我们就可以了。而中间的处理过程对我们来说是透明的，中间的黑盒操作主要是依靠Executor来实现的。</p>
-<p>​    SQLSession有两个实现类：DefaultSqlSession、SQLSessionManger，每次在使用完SQLSession之后需要正确的进行关闭动作，将连接资源交还给数据库，以免导致资源的匮乏而导致其他问题。</p>
-<p>​    用途：</p>
-<pre><code>1. 获取映射器，让映射器通过命名空间和方法名找到对应的SQL，发送给数据库执行后返回结果
- 2. 在SqlSession层，可以通过update、insert、delete、select等方法，带上SQL的ID来操作在XML中配置好的SQL，从而完成我们的工作
-</code></pre><h3 id="SQL-Mapper"><a href="#SQL-Mapper" class="headerlink" title="SQL Mapper"></a>SQL Mapper</h3><p>​    由一个接口和XML文件（或注解）组成，需要给出SQL和对应的映射规则，负责发送SQL去执行，并返回结果</p>
-<p>​    作用：</p>
-<pre><code>1. 定义参数类型
- 2. 描述缓存
- 3. 描述SQL语句
- 4. 定义SQL返回结果和POJO的映射关系
-</code></pre><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="SqlSessionFactoryBuilder"><a href="#SqlSessionFactoryBuilder" class="headerlink" title="SqlSessionFactoryBuilder"></a>SqlSessionFactoryBuilder</h3><p>​    它可以通过XML文件或者java编码来构造SQLSessionFactory，可以构造多个SessionFactory，我们在构造完SqlSessionFactory之后，Builder也就完成了它的使命，我们就可以对其进行回收了，所以它的生命周期只需要在方法局部内就可以了。</p>
-<h3 id="SQLSessionFactory"><a href="#SQLSessionFactory" class="headerlink" title="SQLSessionFactory"></a>SQLSessionFactory</h3><p>​    每次程序需要访问数据库的时候，SqlSessionFactory就会创建出SqlSession会话，所以，SqlSessionFactory应该要贯穿于Mybatis的整个生命周期，但是，如果程序中多次创建同一个数据库的SqlSessionFactory，那么每次创建SqlSessionFactory就会打开更多的数据库连接资源，那么数据库连接资源就会很快的被耗尽。所以SqlSessionFactory果断需要配置成单例的，在整个Mybatis的生命周期中，只需要存在同一个数据库的一个SqlSessionFactory实例来管理好数据库的连接就可以了。</p>
-<h3 id="SqlSession-1"><a href="#SqlSession-1" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>​    是一个会话，相当于JDBC的一个Connection对象，它的生命周期是在请求数据库处理事务的过程中，是一个线程不安全的对象。</p>
-<h3 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h3><p>​    应该在一个SqlSession事务方法之内，是一个方法级别的东西。最大的范围是和SqlSession范围相同的。尽量在一个SqlSession中使用它</p>
-<p><img src="/2019/05/08/Mybatis的基本构成/Mybatis组件的生命周期.png" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/05/06/Mybatis配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/06/Mybatis配置/" itemprop="url">Mybatis配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T23:26:05+08:00">
-                2019-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1-XML方式与注解方式对比"><a href="#1-XML方式与注解方式对比" class="headerlink" title="1. XML方式与注解方式对比"></a>1. XML方式与注解方式对比</h3><ol>
-<li><p>使用Mapper.xml的方式</p>
-<p>优势：和接口分离，便于统一管理； 复杂的语句不会影响接口的可读性，可以带来更灵活的空间</p>
-<p>劣势：存在较多的XML文件</p>
-</li>
-<li><p>使用注解的方式</p>
-<p>优势：在接口层就能看到对应的SQL，不需要再去查找xml文件，可读性高，较为方便</p>
-<p>劣势：如果存在较为复杂的联合查询，那么会因为SQL语句过长而影响阅读，导致可读性降低；另外，这种方式的SQL无法进行复用，也就是无法使用xml文件中的include方式。</p>
-</li>
-</ol>
-<h3 id="2-配置文件"><a href="#2-配置文件" class="headerlink" title="2. 配置文件"></a>2. 配置文件</h3><p>​    mybatis-config.xml中配置的每一个信息都可以在org.apache.ibatis.session.Configuration类中找到对应的属性，其实说白了，在xml中配置这么多的属性，就是为了组装这个Configuration的</p>
-<h6 id="属性配置"><a href="#属性配置" class="headerlink" title="属性配置"></a>属性配置</h6><p>​    mybatis的配置文件中的值可以在外部配置，可以通过配置properties文件的方式。在mybatis-config.xml中以如${ driver.class }的方式引入。</p>
-<p>​    如果在项目中多处配置了属性的值，优先级如下：</p>
-<p>​    方法参数传递的属性  –&gt;  properties resource中指定的URL文件  –&gt;  最后是properties体中指定的属性</p>
-<p>​    切记不要使用混合的方式，否则会使得代码看上去很混乱，首选的方式应该是properties文件的方式</p>
-<p>​    如果系统有对密码、用户名等进行加解密的需求，建议使用配置properties文件，然后通过代码方式来创建SqlSessionFactory的方式。</p>
-<p>​    从mybatis3.4.2开始，可以为占位符设定一个默认值，如：${username: mysql}，这里如果username没有配置的话，那么将取mysql作为参数值。如果需要使用这一特性，必须要启用默认值特性：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">"org/mybatis/example/config.properties"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"org.apache.ibatis.parsing.PropertyParser.enable-default-value"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span> <span class="comment">&lt;!-- 启用默认值特性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h6 id="设置（settings）"><a href="#设置（settings）" class="headerlink" title="设置（settings）"></a>设置（settings）</h6><p>​    是Mybatis最复杂的配置，也是Mybatis最重要的配置之一，它可以改变Mybatis运行时的行为。比如配置proxyFactory指定Mybatis创建具有延时加载能力的对象所使用到的代理工具等。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">setting</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h6 id="别名（typealias）"><a href="#别名（typealias）" class="headerlink" title="别名（typealias）"></a>别名（typealias）</h6><p>​    可以使用一个简短的名称来代替类的全限定名，这个名称可以在Mybatis的上下文中使用。别名是不区分大小写的，别名是在解析配置文件中生成，并长期保存在Configuration对象中的，在需要的时候取出来即可，这样就可以不用在运行时再创建它的实例了。</p>
-<p>​    Mybatis为我们定义好了常用的类型的别名，比如：数值、字符串、日期和集合等，这里展示部分TypeAliasRegistry中的配置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">registerAlias(<span class="string">"date[]"</span>, Date[].class);</span><br><span class="line">   registerAlias(<span class="string">"decimal[]"</span>, BigDecimal[].class);</span><br><span class="line">   registerAlias(<span class="string">"bigdecimal[]"</span>, BigDecimal[].class);</span><br><span class="line">   registerAlias(<span class="string">"biginteger[]"</span>, BigInteger[].class);</span><br><span class="line">   registerAlias(<span class="string">"object[]"</span>, Object[].class);</span><br><span class="line"></span><br><span class="line">   registerAlias(<span class="string">"map"</span>, Map.class);</span><br><span class="line">   registerAlias(<span class="string">"hashmap"</span>, HashMap.class);</span><br><span class="line">   registerAlias(<span class="string">"list"</span>, List.class);</span><br><span class="line">   registerAlias(<span class="string">"arraylist"</span>, ArrayList.class);</span><br><span class="line">   registerAlias(<span class="string">"collection"</span>, Collection.class);</span><br><span class="line">   registerAlias(<span class="string">"iterator"</span>, Iterator.class);</span><br><span class="line"></span><br><span class="line">   registerAlias(<span class="string">"ResultSet"</span>, ResultSet.class);</span><br></pre></td></tr></table></figure>
-<p>​    当然也可以自定别名，通过<typealiases>标签：</typealiases></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置别名 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">"testAlias"</span> <span class="attr">type</span>=<span class="string">"com.summer.test.TestAlias"</span>&gt;</span><span class="tag">&lt;/<span class="name">typeAlias</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 通过包扫描的方式定义别名 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"com.summer.domain"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>​    包扫描的方式可以配合注解的方式使用，如果没有使用Alias注解的话，也是会被扫描的，只不过是将类的首字母小写作为别名</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Alias</span>(<span class="string">"role"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="typeHandler类型处理器"><a href="#typeHandler类型处理器" class="headerlink" title="typeHandler类型处理器"></a>typeHandler类型处理器</h6><p>​    Mybatis在预处理语句中( PreparedStatement )，在设置每一个参数或者从结果中取出一个值时，都会用注册了的typeHandler进行处理。</p>
-<p>​    也分为系统定义和自定义两种，但是一般来说，使用系统已经设置好的就已经可以完成大部分功能</p>
-<p>​    系统定义部分展示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">register(String.class, JdbcType.NVARCHAR, <span class="keyword">new</span> NStringTypeHandler());</span><br><span class="line">   register(String.class, JdbcType.NCHAR, <span class="keyword">new</span> NStringTypeHandler());</span><br><span class="line">   register(String.class, JdbcType.NCLOB, <span class="keyword">new</span> NClobTypeHandler());</span><br><span class="line">   register(JdbcType.CHAR, <span class="keyword">new</span> StringTypeHandler());</span><br><span class="line">   register(JdbcType.VARCHAR, <span class="keyword">new</span> StringTypeHandler());</span><br><span class="line">   register(JdbcType.CLOB, <span class="keyword">new</span> ClobTypeHandler());</span><br></pre></td></tr></table></figure>
-<h6 id="自定义typeHandler"><a href="#自定义typeHandler" class="headerlink" title="自定义typeHandler"></a>自定义typeHandler</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.epoch.mybatis.study.typehandler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.type.JdbcType;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.type.MappedJdbcTypes;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.type.MappedTypes;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.type.TypeHandler;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.CallableStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> MyStringTypeHandler</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> cjh</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/5/15 22:55</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@MappedTypes</span>(&#123;String.class&#125;)</span><br><span class="line"><span class="meta">@MappedJdbcTypes</span>(JdbcType.VARCHAR)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyStringTypeHandler</span> <span class="keyword">implements</span> <span class="title">TypeHandler</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    Logger logger = LoggerFactory.getLogger(MyStringTypeHandler.class);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setParameter</span><span class="params">(PreparedStatement ps, <span class="keyword">int</span> i, String parameter, JdbcType jdbcType)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"设置MyStringTypeHandler类型数值..."</span>);</span><br><span class="line">        ps.setString(i, parameter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResult</span><span class="params">(ResultSet rs, String columnName)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"获取MyStringTypeHandler类型数值..."</span>);</span><br><span class="line">        <span class="keyword">return</span> rs.getString(columnName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResult</span><span class="params">(ResultSet rs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"使用MyStringTypeHandler获取下标字符串"</span>);</span><br><span class="line">        <span class="keyword">return</span> rs.getString(columnIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResult</span><span class="params">(CallableStatement cs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"使用MyStringTypeHandler CallableStatement获取下标字符串"</span>);</span><br><span class="line">        <span class="keyword">return</span> cs.getString(columnIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="枚举类型typeHandler"><a href="#枚举类型typeHandler" class="headerlink" title="枚举类型typeHandler"></a>枚举类型typeHandler</h6><p>​    Mybatis为我们提供了两种类型的typeHandler：EnumTypeHandler、EnumOrdinalTypeHandler</p>
-<p>​    EnumTypeHandler：使用枚举字符串的名字作为参数传递</p>
-<p>​    EnumOrdinalTypeHandler：使用整数下标作为参数传递，是Mybatis默认的枚举类型处理器</p>
-<p>​    在更多的应用场景中，我们希望使用呢我们自己的typeHandler来处理枚举类型。比如我们在定义了Sex枚举类型</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.epoch.mybatis.study.enums;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> Sex</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> cjh</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/5/15 23:47</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Sex &#123;</span><br><span class="line"></span><br><span class="line">    MALE(<span class="number">1</span>, <span class="string">"男"</span>),</span><br><span class="line">    FMALE(<span class="number">2</span>, <span class="string">"女"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Sex</span><span class="params">(Integer id, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Sex <span class="title">getSex</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (id == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> MALE;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (id == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> FMALE;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>之后，可以在Mybatis中添加如下配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">typeHandler</span> <span class="attr">handler</span>=<span class="string">"org.apache.ibatis.type.EnumOrdinalTypeHandler"</span> <span class="attr">javaType</span>=<span class="string">"com.xxx.xxx.Sex"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后在resultMap中：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"sex"</span> <span class="attr">property</span>=<span class="string">"sex"</span> <span class="attr">typeHandler</span>=<span class="string">"org.apache.ibatis.type.EnumOrdinalTypeHandler"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果系统提供的两个枚举类型处理器都不能满足我们的要求，我们可以通过实现TypeHandler<t>接口来自定义自己的枚举类型转换器</t></p>
-<h6 id="ObjectFactory"><a href="#ObjectFactory" class="headerlink" title="ObjectFactory"></a>ObjectFactory</h6><p>​    当Mybatis在构建一个结果返回的时候，都会使用到ObjectFactory（对象工厂）来创建一个pojo。Mybatis有自己的默认的对象工厂的实现类DefaultObjectFactory，如果我们想要定义我们自己的对象工厂，那么可以通过继承DefaultObjectFactory或者实现ObjectFactory接口来实现。然后进行如下配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">objectFactory</span> <span class="attr">type</span>=<span class="string">"com.summer.mybatis.MyObjectFactory"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"MyObjectFactory"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">objectFactory</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/28/类型信息/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/28/类型信息/" itemprop="url">Java类型信息</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T22:03:13+08:00">
-                2019-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="RTTI（Run-Time-Type-Identification运行时类型识别）"><a href="#RTTI（Run-Time-Type-Identification运行时类型识别）" class="headerlink" title="RTTI（Run-Time Type Identification运行时类型识别）"></a>RTTI（Run-Time Type Identification运行时类型识别）</h3><p>​    运行时类型信息让我们可以<font color="red">在程序运行的过程中发现和使用类型信息</font></p>
-<p>​    含义：在运行时，识别一个对象的类型（所有的类型转换都是在运行时进行正确性检查的）</p>
-<h5 id="两种方式识别对象和类的信息"><a href="#两种方式识别对象和类的信息" class="headerlink" title="两种方式识别对象和类的信息"></a>两种方式识别对象和类的信息</h5><ol>
-<li>传统的RTTI</li>
-<li>反射机制</li>
-</ol>
-<h5 id="为什么需要RTTI"><a href="#为什么需要RTTI" class="headerlink" title="为什么需要RTTI"></a>为什么需要RTTI</h5><p>​    先来了解一下多态的概念</p>
-<h6 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h6><p>​    面向对象编程基本的目的是：<font color="red">让代码只操作对基类的引用</font>，这样如果要添加一个新类来扩展程序就不会影响到原来的代码。所以即使是<font color="red">通过泛化的对象引用来调用</font>，也能产生正确的行为。这就是多态。典型的例子：Shape基类有多个子类Circle、Square等</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Shape&gt; shapeList = Arrays.asList(<span class="keyword">new</span> Circle(), <span class="keyword">new</span> Square());</span><br><span class="line"><span class="keyword">for</span>(Shape shape: shapeList) &#123;</span><br><span class="line">    shape.draw();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>​    在上面的代码中，Circle、Square会发生向上转型，在转型的过程中也失去了具体类型信息。对于shapeList来说，他们只是Shape对象。</p>
-<p>​    而当从容器中取出对象的时候，实际上他们都会被当做Object持有，只不过会自动的将结果转型Shape，这里的RTTI类型转换并不彻底，Object只转型成了Shape但是没有转型为其子类，因为在List<shape>中，我们只知道保存的都是Shape，在编译时通过java的容器和泛型来强制确保这一点，而在运行时由类型转换来确保这一点。</shape></p>
-<p>​    而接下去的事情就要交给多态了</p>
-<h6 id="class对象"><a href="#class对象" class="headerlink" title="class对象"></a>class对象</h6><p>​    Class对象给出了类型信息在运行时是如何表示的，它<font color="red">包含了与类的有关信息</font>，用来创建类的所有“常规”对象，被保存在与类名同名的一个.class文件中。Java使用Class对象来执行其RTTI</p>
-<p>​    所有的类都是在对其第一次引用时，动态的加载到JVM中的</p>
-<p>​    所以，Java程序在它开始运行之前并非完全被加载，而是在需要时动态的加载到JVM中的，而一旦一个类的Class对象被加载到内存中之后，它就会被用来创建这个类的所有对象</p>
-<h6 id="获取Class对象"><a href="#获取Class对象" class="headerlink" title="获取Class对象"></a>获取Class对象</h6><p>获取Class对象的几种方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. Class.forName(<span class="string">"XXX"</span>)；</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	a. 使用这种方式获取Class对象会导致该类被加载，前提是该类还没有被加载的情况下，使用这种方式的好处是可以不用通过对象实例来获取Class对象；</span></span><br><span class="line"><span class="comment">	b. 但是使用这种方式必须要捕获ClassNotFoundException异常，因为在编译期forName()无法对传入的字符串进行检查对应的类是否真实存在的，只能在运行时进行检查，如果不存在，则抛出异常</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">    </span><br><span class="line"><span class="number">2</span>. Student.class;	</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	a. 更简便，且更安全，因为它在编译时就会受到检查（所以也不需要置于try语句块中），根除了forName()方法的调用，也更高效了，所以建议使用这种方式来获取；</span></span><br><span class="line"><span class="comment">	b. 这种方式不仅可以应用于类，也可以应用于接口、数组以及基本数据类型;</span></span><br><span class="line"><span class="comment">	c. 这种方式触发的是类的加载阶段，在这个阶段类的创建已经完成，获取其引用并不困难，但是不会触发类的初始化过程</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="number">3</span>. obj.getClass();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	也会触发类的初始化过程</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>来看个例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cjh.study.classinfo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> InitTest</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> cjh</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/5/4 16:18</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassInitialization</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> random = <span class="keyword">new</span> Random().nextInt(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用字面量方式获取Class对象</span></span><br><span class="line">        Class&lt;InitTest&gt; initTestClass = InitTest.class;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"创建InitTest引用..."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不会触发类的初始化</span></span><br><span class="line">        System.out.println(<span class="string">"InitTest compileStaticFinal = "</span> + </span><br><span class="line">                           InitTest.compileStaticFinal);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 会触发类的初始化</span></span><br><span class="line">        System.out.println(<span class="string">"InitTest nonCompileStaticFinal= "</span> + </span><br><span class="line">                           InitTest.nonCompileStaticFinal);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 会触发类的初始化</span></span><br><span class="line">        System.out.println(<span class="string">"InitTest2.staticNonFinal = "</span> + </span><br><span class="line">                           InitTest2.staticNonFinal);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class&lt;?&gt; initTest3 = 		</span><br><span class="line">                Class.forName(<span class="string">"com.cjh.study.classinfo.InitTest3"</span>);</span><br><span class="line">            </span><br><span class="line">            System.out.println(<span class="string">"创建InitTest3引用..."</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 会触发类的初始化</span></span><br><span class="line">            System.out.println(<span class="string">"InitTest3.staticNonFinal = "</span> + </span><br><span class="line">                               InitTest3.staticNonFinal);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InitTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 编译期静态常量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> compileStaticFinal = <span class="number">12</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 非编译期静态常量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> nonCompileStaticFinal = ClassInitialization.random ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"初始化 InitTest..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InitTest2</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 静态成员变量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> staticNonFinal = <span class="number">23</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"初始化 InitTest2..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InitTest3</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 静态成员变量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> staticNonFinal = <span class="number">55</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"初始化 InitTest3..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">    创建InitTest引用...</span><br><span class="line">    InitTest compileStaticFinal = <span class="number">12</span></span><br><span class="line">    初始化 InitTest...</span><br><span class="line">    InitTest nonCompileStaticFinal = <span class="number">32</span></span><br><span class="line">    初始化 InitTest2...</span><br><span class="line">    InitTest2.staticNonFinal = <span class="number">23</span></span><br><span class="line">    初始化 InitTest3...</span><br><span class="line">    创建InitTest3引用...</span><br><span class="line">    InitTest3.staticNonFinal = <span class="number">55</span></span><br></pre></td></tr></table></figure>
-<p>​    从如上的代码结果可以得出结论：</p>
-<pre><code>1. 使用字面量的方式获取Class对象不会触发类的初始化
- 2. 访问编译期静态常量（如：InitTest.compileStaticFinal）不会触发类的初始化。这是因为&lt;font color=red&gt;编译期静态常量会通过传播优化的方式被存储到一个NotInitialization常量池中&lt;/font&gt;，如InitTest中的静态常量会被存储到NotInitialization常量池中，而之后对InitTest的常量的引用就会被转化为对NotInitialization类对自身常量池的引用，所以在编译期后，对编译期静态常量的获取都是从NotInitialization池中获取的，所以这是编译期静态常量不触发类的初始化的重要原因。
-</code></pre><h6 id="泛化的Class引用"><a href="#泛化的Class引用" class="headerlink" title="泛化的Class引用"></a>泛化的Class引用</h6><p>​    </p>
-<h6 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h6><p>​    许多需要类型转换的场景中，我们更多的是进行的强制类型转换，例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal ani = <span class="keyword">new</span> Dog();</span><br><span class="line">Dog dog = (Dog) ani;</span><br></pre></td></tr></table></figure>
-<p>​    之所以可以进行强制类型转换，这完全要归功于RTTI，所有的类型转换都是在运行时进行正确性检查的，利用RTTI验证类型是否正确从而确保强制类型转换的完成，如果类型转换失败，那么将会抛出类型转换异常。</p>
-<h6 id="instanceof（RTTI的第三种形式）"><a href="#instanceof（RTTI的第三种形式）" class="headerlink" title="instanceof（RTTI的第三种形式）"></a>instanceof（RTTI的第三种形式）</h6><p>​    在进行向下的类型转换时，可以通过判断 x instanceof Animal的返回值来判定是否可以进行向下的类型转换操作。</p>
-<p>​    它的返回结果和isInstanceOf( )方法一致，如：class.isInstanceOf( obj ); isInstanceOf()是Class类Native方法，其中obj是被测试的对象或者变量，如果obj是调用这个方法的class或者接口的实例，则返回true</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/04/23/mybatis-generator/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/23/mybatis-generator/" itemprop="url">使用mybatis-generator</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T22:05:35+08:00">
-                2019-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1-generator的配置"><a href="#1-generator的配置" class="headerlink" title="1. generator的配置"></a>1. generator的配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;context id=&quot;mysqlTables&quot; targetRuntime=&quot;MyBatis3&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--是否生成注释--&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">                        connectionURL=&quot;jdbc:mysql://localhost:3306/mybatis_test&quot;</span><br><span class="line">                        userId=&quot;root&quot;</span><br><span class="line">                        password=&quot;root&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;javaTypeResolver&gt;</span><br><span class="line">            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/javaTypeResolver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--生成model类存放位置--&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.epoch.mybatis.study.domain&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaModelGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--生成映射文件存放位置--&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;com.epoch.mybatis.study.mapper&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/sqlMapGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--生成dao存放路径--&gt;</span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.epoch.mybatis.study.dao&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaClientGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--需要生成的实体类对应的表--&gt;</span><br><span class="line">        &lt;table tableName=&quot;table_02&quot;&gt;&lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="2-maven引入插件"><a href="#2-maven引入插件" class="headerlink" title="2. maven引入插件"></a>2. maven引入插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;plugin&gt;</span><br><span class="line">	&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">	&lt;configuration&gt;</span><br><span class="line">		&lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">		&lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">		&lt;configurationFile&gt;src/main/resources/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">	&lt;/configuration&gt;</span><br><span class="line">	&lt;executions&gt;</span><br><span class="line">		&lt;execution&gt;</span><br><span class="line">			&lt;id&gt;Generate MyBatis Artifacts&lt;/id&gt;</span><br><span class="line">			&lt;goals&gt;</span><br><span class="line">				&lt;goal&gt;generate&lt;/goal&gt;</span><br><span class="line">			&lt;/goals&gt;</span><br><span class="line">		&lt;/execution&gt;</span><br><span class="line">	&lt;/executions&gt;</span><br><span class="line">	&lt;!--这里在插件中手动加入mysql的驱动依赖，否则可能会出错，报找不到驱动包的异常--&gt;</span><br><span class="line">	&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;5.1.30&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;/dependencies&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="3-idea启动项配置"><a href="#3-idea启动项配置" class="headerlink" title="3. idea启动项配置"></a>3. idea启动项配置</h3><pre><code>点击导航栏中的Run -&gt; edit Configurations... -&gt; 添加maven配置，Command line输入：
-    mybatis-generator:generate -edit
-</code></pre><p><img src="/2019/04/23/mybatis-generator/generator_command.png" alt></p>
-<h3 id="4-运行效果"><a href="#4-运行效果" class="headerlink" title="4. 运行效果"></a>4. 运行效果</h3><p><img src="/2019/04/23/mybatis-generator/generator_result.png" alt></p>
-<h2 id="4-优劣势"><a href="#4-优劣势" class="headerlink" title="4. 优劣势"></a>4. 优劣势</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>可以自动的生成代码，使用XXXExample的方式，可以不用自己写SQL</p>
-<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>这会导致如果滥用的话，导致索引设计不好设计，建立好的索引会因为使用不当而导致索引失效，出现问题之后无法快速定位到问题</p>
-<p>所以是否使用Example的方式需要慎重</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1832,7 +1894,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1843,7 +1905,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1854,7 +1916,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

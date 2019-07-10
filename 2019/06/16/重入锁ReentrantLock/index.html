@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Summer_wind&#39;s Blog">
 <meta property="og:description" content="ReentrantLock重入锁​        使用ReentrantLock可以完成和synchronized同样的功能，但是使用synchronized可以自动释放锁，使用重入锁必须要手动释放锁，所以一般会放在finally块中释放锁。 尝试锁定​        使用ReentrantLock可以进行尝试锁定，这样在无法锁定或者在指定时间内无法锁定，线程可以决定是否继续等待。在尝试锁定之后，">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-17T16:08:03.461Z">
+<meta property="og:updated_time" content="2019-06-19T14:58:14.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重入锁ReentrantLock">
 <meta name="twitter:description" content="ReentrantLock重入锁​        使用ReentrantLock可以完成和synchronized同样的功能，但是使用synchronized可以自动释放锁，使用重入锁必须要手动释放锁，所以一般会放在finally块中释放锁。 尝试锁定​        使用ReentrantLock可以进行尝试锁定，这样在无法锁定或者在指定时间内无法锁定，线程可以决定是否继续等待。在尝试锁定之后，">
@@ -344,6 +344,8 @@
 <h3 id="尝试锁定"><a href="#尝试锁定" class="headerlink" title="尝试锁定"></a>尝试锁定</h3><p>​        使用ReentrantLock可以进行尝试锁定，这样在无法锁定或者在指定时间内无法锁定，线程可以决定是否继续等待。在尝试锁定之后，不管有没有锁定，方法都将继续执行。所以，可以在方法中根据是否锁定来进行相应的逻辑处理。</p>
 <h3 id="获取不到锁可被interrupt"><a href="#获取不到锁可被interrupt" class="headerlink" title="获取不到锁可被interrupt"></a>获取不到锁可被interrupt</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lock02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m1</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            System.out.println(<span class="string">"t1 start"</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);</span><br><span class="line">            System.out.println(<span class="string">"t1 end"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"t1 interrupted"</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> isLock = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"><span class="comment">//            lock.lock();</span></span><br><span class="line">            lock.lockInterruptibly();</span><br><span class="line">            isLock = lock.tryLock();</span><br><span class="line">            System.out.println(<span class="string">"t2 start"</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">            System.out.println(<span class="string">"t2 end"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"t2 interrupted"</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (isLock) &#123;</span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Lock02 lock01 = <span class="keyword">new</span> Lock02();</span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                lock01.m1();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        t1.start();</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                lock01.m2();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        t2.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        t2.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    	控制台输出：</span></span><br><span class="line"><span class="comment">    	t1 start</span></span><br><span class="line"><span class="comment">		t2 interrupted</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>​        线程t1在Integer.MAX_VALUE的时间内会一直执行，正常情况下t2是获取不到锁的，这个时候如果不做处理，那么t2将会一直等待下去，不会被其他线程打断。但是如果在t2中调用了lock.lockInterruptibly();方法之后，则表明t2是可以被打断的。也就是说，t2在等待t1释放锁的过程中，如果不想继续等了，主线程调用t2.interrupt()方法即可将t2线程打断。</p>
+<h3 id="指定为公平锁"><a href="#指定为公平锁" class="headerlink" title="指定为公平锁"></a>指定为公平锁</h3><p>​        假如现在有6个线程，其中一个线程拿到了锁顺利执行完逻辑后释放了锁，这时候剩下的5个线程都会去争用这把锁，谁先拿到就是谁的，谁就可以执行，并不会关心其他的线程等了多长的时间，也就是说不会根据谁等的时间长，谁就优先获得锁。这种称为竞争锁，不是公平锁。这种的效率会高些，因为线程调度器不用计算哪个线程等待的时间更长。synchronized默认是非公平锁。</p>
+<p>​        公平锁自然就是根据等待时间来判断谁可以先获取到锁的。new ReentrantLock(true)即可声明为公平锁。</p>
 
       
     </div>
@@ -383,6 +385,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/19/锁面试题/" rel="prev" title="锁面试题">
+                锁面试题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -461,7 +467,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -472,7 +478,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -483,7 +489,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -516,7 +522,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantLock重入锁"><span class="nav-number">1.</span> <span class="nav-text">ReentrantLock重入锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试锁定"><span class="nav-number">2.</span> <span class="nav-text">尝试锁定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取不到锁可被interrupt"><span class="nav-number">3.</span> <span class="nav-text">获取不到锁可被interrupt</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantLock重入锁"><span class="nav-number">1.</span> <span class="nav-text">ReentrantLock重入锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试锁定"><span class="nav-number">2.</span> <span class="nav-text">尝试锁定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取不到锁可被interrupt"><span class="nav-number">3.</span> <span class="nav-text">获取不到锁可被interrupt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指定为公平锁"><span class="nav-number">4.</span> <span class="nav-text">指定为公平锁</span></a></li></ol></div>
             
 
           </div>
