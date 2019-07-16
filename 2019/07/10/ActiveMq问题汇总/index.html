@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="启动失败1. bin目录下执行./activemq start，mq未正常启动 2. 执行./activemq console，查看出错信息 3. 从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了  执行命令：lsof -i:5672，查看端口占用情况    可以看出，rabbitmq占用了该端口  修改activemq/conf目录下的activemq.xml中">
+<meta name="description" content="启动失败 bin目录下执行./activemq start，mq未正常启动  执行./activemq console，查看出错信息   从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了  执行命令：lsof -i:5672，查看端口占用情况   可以看出，rabbitmq占用了该端口  修改activemq/conf目录下的activemq.xml中amqp对应">
 <meta name="keywords" content="ActiveMq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ActiveMq问题汇总">
 <meta property="og:url" content="https://fengxingxia.github.io/2019/07/10/ActiveMq问题汇总/index.html">
 <meta property="og:site_name" content="Summer_wind&#39;s Blog">
-<meta property="og:description" content="启动失败1. bin目录下执行./activemq start，mq未正常启动 2. 执行./activemq console，查看出错信息 3. 从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了  执行命令：lsof -i:5672，查看端口占用情况    可以看出，rabbitmq占用了该端口  修改activemq/conf目录下的activemq.xml中">
+<meta property="og:description" content="启动失败 bin目录下执行./activemq start，mq未正常启动  执行./activemq console，查看出错信息   从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了  执行命令：lsof -i:5672，查看端口占用情况   可以看出，rabbitmq占用了该端口  修改activemq/conf目录下的activemq.xml中amqp对应">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://fengxingxia.github.io/2019/07/10/ActiveMq问题汇总/start_faile.png">
 <meta property="og:image" content="https://fengxingxia.github.io/2019/07/10/ActiveMq问题汇总/port_used.png">
 <meta property="og:image" content="https://fengxingxia.github.io/2019/07/10/ActiveMq问题汇总/port_edit.png">
-<meta property="og:updated_time" content="2019-07-16T14:14:25.678Z">
+<meta property="og:updated_time" content="2019-07-16T14:24:59.591Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ActiveMq问题汇总">
-<meta name="twitter:description" content="启动失败1. bin目录下执行./activemq start，mq未正常启动 2. 执行./activemq console，查看出错信息 3. 从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了  执行命令：lsof -i:5672，查看端口占用情况    可以看出，rabbitmq占用了该端口  修改activemq/conf目录下的activemq.xml中">
+<meta name="twitter:description" content="启动失败 bin目录下执行./activemq start，mq未正常启动  执行./activemq console，查看出错信息   从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了  执行命令：lsof -i:5672，查看端口占用情况   可以看出，rabbitmq占用了该端口  修改activemq/conf目录下的activemq.xml中amqp对应">
 <meta name="twitter:image" content="https://fengxingxia.github.io/2019/07/10/ActiveMq问题汇总/start_faile.png">
 
 
@@ -344,14 +344,17 @@
       
 
       
-        <h3 id="启动失败"><a href="#启动失败" class="headerlink" title="启动失败"></a>启动失败</h3><pre><code>1. bin目录下执行./activemq start，mq未正常启动
-2. 执行./activemq console，查看出错信息
-</code></pre><p><img src="/2019/07/10/ActiveMq问题汇总/start_faile.png" alt>3. 从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了</p>
-<ol start="4">
-<li>执行命令：lsof -i:5672，查看端口占用情况</li>
-</ol>
+        <h3 id="启动失败"><a href="#启动失败" class="headerlink" title="启动失败"></a>启动失败</h3><ol>
+<li><p>bin目录下执行./activemq start，mq未正常启动</p>
+</li>
+<li><p>执行./activemq console，查看出错信息</p>
+<p><img src="/2019/07/10/ActiveMq问题汇总/start_faile.png" alt></p>
+</li>
+<li><p>从出错信息可以看出，在启动的时候，activemq的amqp的5672端口被占用了</p>
+</li>
+<li><p>执行命令：lsof -i:5672，查看端口占用情况</p>
 <p><img src="/2019/07/10/ActiveMq问题汇总/port_used.png" alt></p>
-<ol start="5">
+</li>
 <li><p>可以看出，rabbitmq占用了该端口</p>
 </li>
 <li><p>修改activemq/conf目录下的activemq.xml中amqp对应的端口，重新启动即可</p>
