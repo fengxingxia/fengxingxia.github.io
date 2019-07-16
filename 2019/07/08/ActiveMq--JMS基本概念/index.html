@@ -88,7 +88,7 @@
 <meta property="og:description" content="JMS是什么​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术 JMS规范​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq JMS Provider​        实现了JMS接口和规范的消息中间件 JMS Message">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/topic.png">
-<meta property="og:updated_time" content="2019-07-16T14:17:23.448Z">
+<meta property="og:updated_time" content="2019-07-16T14:22:23.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ActiveMq--JMS基本概念">
 <meta name="twitter:description" content="JMS是什么​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术 JMS规范​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq JMS Provider​        实现了JMS接口和规范的消息中间件 JMS Message">
@@ -349,8 +349,8 @@
 <h3 id="JMS-Producer"><a href="#JMS-Producer" class="headerlink" title="JMS  Producer"></a>JMS  Producer</h3><p>​        消息生产者，创建和发送JMS消息的客户端应用</p>
 <h3 id="JMS-Consumer"><a href="#JMS-Consumer" class="headerlink" title="JMS Consumer"></a>JMS Consumer</h3><p>​        消息消费者，是接收和处理JMS消息的客户端应用    </p>
 <p>​        消费者有两种消费方式：</p>
-<p>​    1. 同步消费：消费者通过调用receive方法，从队列中显示的提取消息，如果队列中没有消息到达，那么receive方法会阻塞，直到消息到达</p>
-<pre><code>2. 异步消费：消费者向消息中间件注册一个消息监听器，定义当有消息到达的时候应当采取的动作，这样，当有消息到达的时候，消息中间件通过回调的方式来处理    
+<pre><code>1. 同步消费：消费者通过调用receive方法，从队列中显示的提取消息，如果队列中没有消息到达，那么receive方法会阻塞，直到消息到达
+ 2. 异步消费：消费者向消息中间件注册一个消息监听器，定义当有消息到达的时候应当采取的动作，这样，当有消息到达的时候，消息中间件通过回调的方式来处理    
 </code></pre><h3 id="JMS-domains"><a href="#JMS-domains" class="headerlink" title="JMS domains"></a>JMS domains</h3><p>​        消息传递域，JMS规范中定义了两种消息传递域：点对点（Point To Point 简称P2P）、发布/订阅(Pub / Sub)</p>
 <ol>
 <li><p>点对点的特点：</p>

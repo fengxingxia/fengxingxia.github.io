@@ -502,8 +502,8 @@
 <h3 id="JMS-Producer"><a href="#JMS-Producer" class="headerlink" title="JMS  Producer"></a>JMS  Producer</h3><p>​        消息生产者，创建和发送JMS消息的客户端应用</p>
 <h3 id="JMS-Consumer"><a href="#JMS-Consumer" class="headerlink" title="JMS Consumer"></a>JMS Consumer</h3><p>​        消息消费者，是接收和处理JMS消息的客户端应用    </p>
 <p>​        消费者有两种消费方式：</p>
-<p>​    1. 同步消费：消费者通过调用receive方法，从队列中显示的提取消息，如果队列中没有消息到达，那么receive方法会阻塞，直到消息到达</p>
-<pre><code>2. 异步消费：消费者向消息中间件注册一个消息监听器，定义当有消息到达的时候应当采取的动作，这样，当有消息到达的时候，消息中间件通过回调的方式来处理    
+<pre><code>1. 同步消费：消费者通过调用receive方法，从队列中显示的提取消息，如果队列中没有消息到达，那么receive方法会阻塞，直到消息到达
+ 2. 异步消费：消费者向消息中间件注册一个消息监听器，定义当有消息到达的时候应当采取的动作，这样，当有消息到达的时候，消息中间件通过回调的方式来处理    
 </code></pre><h3 id="JMS-domains"><a href="#JMS-domains" class="headerlink" title="JMS domains"></a>JMS domains</h3><p>​        消息传递域，JMS规范中定义了两种消息传递域：点对点（Point To Point 简称P2P）、发布/订阅(Pub / Sub)</p>
 <ol>
 <li><p>点对点的特点：</p>
@@ -1678,8 +1678,7 @@
 <li>发现这个问题之后，为了让现场可以继续使用，马上将BlockingQueue的大小改小了，重新打包扔到线上。</li>
 <li>出现这个问题的原因也有因为消费者是单线程消费而且每次只从BlockingQueue中poll出一条数据进行处理的原因，后续改成了多线程消费，且每次从队列中取出20条数据进行处理。这样Java的内存消耗和CPU占用也就降下来了。</li>
 <li>但是MySQL的占用依然很高，使用mysql -h 127.0.0.1 -u mysql -p 登录到数据库之后，使用show full processlist;发现有一条SQL的执行效率比较低，需要2S多的时间，而且这条SQL还在大量的使用。</li>
-<li><p>查看对应的表发现这个表没有建索引，根据条件字段建立索引之后，MySQL的CPU占用率立马降下来了。这样，线上的应用也就恢复了正常</p>
-<ol start="7">
+<li>查看对应的表发现这个表没有建索引，根据条件字段建立索引之后，MySQL的CPU占用率立马降下来了。这样，线上的应用也就恢复了正常</li>
 <li>这样跑了两天之后，突然又崩溃了。但是这次Java和MySQL的内存和CPU占用都不高，这就很奇怪了。</li>
 <li>刚开始查看了日志，发现RabbitMq连接不上，日志中一直在报RabbitMq Connect time out的错误。但是大佬说这应该不会影响整个应用，导致web页面进不去（页面报read time out异常），于是就就继续找原因。开始抓取线上的堆栈信息进行分析。</li>
 <li>之后，还发现一个现象，所有通过http方式访问Tomcat中的应用的地方都不行了。</li>
@@ -1687,8 +1686,6 @@
 <li>查看Tomcat Server.xml中的配置，了解到配置的MaxThreads为150，MaxAccept为300。也就是说最多支持的http并发连接为450</li>
 <li>在项目中，由于设备采集的人脸、车辆抓拍的信息相当多，再加上RabbitMq连接不上，也就出现了这个问题。</li>
 <li>最后，当然是配置了正确的RabbitMq地址之后，解决了问题。</li>
-</ol>
-</li>
 </ol>
 
           
