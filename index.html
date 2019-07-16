@@ -551,6 +551,53 @@
 <li><p>JMS ReplyTo</p>
 <p>提供本消息的回复消息的地址，由开发者设置，通过这个设置，可以在消费者消费消息之后给出一个应答，也就是在消息投递之后消费者消费的反馈</p>
 </li>
+<li><p>JMS Redelivered</p>
+<p>消息的重新投递，如果一个客户端收到了消息设置了JMS Redelivered的属性，则表示之前可能已经接收过该消息，但是由于某种原因没有确认（acknowledge）,如果该消息被重新投递，那么这个属性的值为true，反之则为false</p>
+</li>
+</ul>
+<h5 id="JMS消息属性"><a href="#JMS消息属性" class="headerlink" title="JMS消息属性"></a>JMS消息属性</h5><pre><code>1. 由应用程序设置和添加的属性，比如：message.setStringProperty( &quot;key&quot;, &quot;value&quot;); 
+  2. 使用JMS定义的属性，使用JMSX作为消息的前缀，如：JMSXUserID：发送消息的用户标识，发送时提供商设置，JMSXAppID: 发送消息时的应用ID，发送时由提供商设置等等
+    3. JMS供应商特定的属性
+</code></pre><h3 id="JMS的可靠性机制"><a href="#JMS的可靠性机制" class="headerlink" title="JMS的可靠性机制"></a>JMS的可靠性机制</h3><ul>
+<li><h4 id="消息接收确认"><a href="#消息接收确认" class="headerlink" title="消息接收确认"></a>消息接收确认</h4><p>​        一个消息只有被确认之后，才被认为是成功消费了，消息的成功消费通常需要包含三个阶段：客户端接收消息、处理消息和消息确认</p>
+<p>在事务性会话中，当一个事务提交后，消息确认自动发生</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 事务性会话，第一个参数为true</span></span><br><span class="line">Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);  </span><br><span class="line"><span class="comment">// 事务提交，消息确认自动发生</span></span><br><span class="line">session.commit();</span><br></pre></td></tr></table></figure>
+<p>在非事务性会话中，消息何时被确认取决于创建会话时的应答模式，有三种应答模式：</p>
+<ul>
+<li>Session.AUTO_ACKNOWLEDGE：当客户端成功的从receive( )方法返回或者从MessageListener.onMessage方法成功返回的时候，消息会被自动确认（一般使用这种模式）</li>
+<li>Session.CLIENT_ACKNOWLEDGE：客户端通过调用消息的acknowledge方法确认，需要注意的是，在使用这种模式时，确认是在会话层上进行的，也就是说，在确认了一条消息的时候，会将之前所有已经消费过的消息一同确认。例如，已经消费了10条消息，在对第5条消息调用acknowledge方法进行确认的时候，这10条消息都会被确认</li>
+<li>Session.DUP_ACKNOWLEDGE：该选择只是会话迟钝的确认消息的提交</li>
+</ul>
+</li>
+<li><h4 id="消息的持久性"><a href="#消息的持久性" class="headerlink" title="消息的持久性"></a>消息的持久性</h4><p>​        JMS支持两种消息提交模式，一种是持久的( PERSISTENT )，另外一种则是非持久性的（NON_PERSISTENT），持久性的消息不会因为JMS Provider的故障而丢失</p>
+</li>
+<li><h4 id="消息的优先级"><a href="#消息的优先级" class="headerlink" title="消息的优先级"></a>消息的优先级</h4><p>​        这个在之前有提过，共有10个级别，默认的级别是4，加急消息一定会先与普通消息到达，需要注意的是，JMS Provider不一定会按照消息的优先级提交消息（那如何保证加急消息一定先到达？）</p>
+</li>
+<li><h4 id="消息过期"><a href="#消息过期" class="headerlink" title="消息过期"></a>消息过期</h4><p>​        可以设置消息的过期时间，默认是永不过期</p>
+</li>
+<li><h4 id="消息的临时目的地"><a href="#消息的临时目的地" class="headerlink" title="消息的临时目的地"></a>消息的临时目的地</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生产者创建临时queue</span></span><br><span class="line">TemporaryQueue temporaryQueue = session.createTemporaryQueue();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生产者将临时queue作为消息消费之后的应答 destination</span></span><br><span class="line">message.setJMSReplyTo(temporaryQueue);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 消息者从消息中获取应答 destination</span></span><br><span class="line">Destination replyTo = message.getJMSReplyTo();</span><br></pre></td></tr></table></figure>
+<p>​    临时目的地的存在时间只保持在创建它们的连接所保持的时间，只有创建了该临时目的地的连接上的消费者才能从这个队列中获取消息</p>
+</li>
+<li><h4 id="JMS持久订阅"><a href="#JMS持久订阅" class="headerlink" title="JMS持久订阅"></a>JMS持久订阅</h4><p>​    持久订阅必须使用PERSISTENT提交消息，创建持久订阅的第一个参数必须是一个topic，JMS Provider会存储发布到持久订阅上的消息。如果最初创建持久订阅的客户或其他客户，使用相同的连接工厂和连接的客户ID，相同的topic，相同的订阅名，那么再次调用会话上的创建持久订阅的方法时，该持久订阅就会被激活，JMS Provider会向客户端发送客户端处于非激活状态时的消息。</p>
+<p>​    持久订阅在某一时刻只能有一个订阅者，在被创建之后会一直保留，在会话调用unsubscribe( )方法时失效</p>
+</li>
+<li><h4 id="本地事务"><a href="#本地事务" class="headerlink" title="本地事务"></a>本地事务</h4><p>​    JMS Session提供了commit( )和rollback( )方法来提交和回滚事务，事务的提交意味着生产的所有消息都将被提交，消费的所有消息都将被确认；回滚则生产的所有消息被销毁，消费的所有消息被恢复并重新提交，除非已经失效的消息，生产者和消费者的事务不能包含在同一个事务中</p>
+</li>
+</ul>
+<h3 id="JMS的PTP模型"><a href="#JMS的PTP模型" class="headerlink" title="JMS的PTP模型"></a>JMS的PTP模型</h3><p>​        定义了客户端如何向队列发送消息，从队列接收消息，以及浏览队列中的消息，PTP模型是基于队列的，可以包含各中消息</p>
+<ul>
+<li><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>​    如果在Session关闭时，有些消息已经被接收但是还没有被确认，那么当消费者下次再连接到队列时，这些消息不会被再次接收</p>
+<p>​    如果在receive方法中设定了消息选择条件，那么不符合条件的消息将会留在队列中，不会被接收到</p>
+<p>​    队列可以长久的保存消息直到消费者消费（没有设置过期条件的情况下），因此消费者不需要因为担心丢失消息而时刻和队列保持连接状态，这也提现出了异步传输的优势</p>
+</li>
+</ul>
+<h3 id="JMS的Pub-Sub模型"><a href="#JMS的Pub-Sub模型" class="headerlink" title="JMS的Pub/Sub模型"></a>JMS的Pub/Sub模型</h3><p>​        定义了如何向内容节点发布和订阅消息，这些节点比称作topic，发布者发布消息到主题，订阅者从主题中订阅消息</p>
+<ul>
+<li><h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h4><p>​    分为持久订阅和非持久订阅，非持久订阅只能接收到客户端处于激活状态下的消息，在持久订阅时，客户端会向JMS注册一个用于识别自己身份的ID，如果客户端处于离线状态，JMS Provider会为这个客户端保存所有发送到这个客户端订阅的主题上的消息，当客户端正常上线之后，会根据自身的ID，获取所有处于离线状态下发送到topic的消息</p>
+<p>​    和PTP模型一样，如果用户在receive中设定了选择条件，那么不符合条件的消息也不会被接收</p>
+<p>​    只有持久订阅才能恢复或重发一个未被确认的消息</p>
+<p>​    </p>
+</li>
 </ul>
 
           
