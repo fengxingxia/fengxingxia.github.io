@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="Summer_wind&#39;s Blog">
 <meta property="og:description" content="JMS是什么​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术 JMS规范​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq JMS Provider​        实现了JMS接口和规范的消息中间件 JMS Message">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/assets/topic.png">
-<meta property="og:updated_time" content="2019-07-16T00:14:31.890Z">
+<meta property="og:image" content="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/topic.png">
+<meta property="og:updated_time" content="2019-07-16T14:17:23.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ActiveMq--JMS基本概念">
 <meta name="twitter:description" content="JMS是什么​        JMS Java Message Service，是一个Java消息服务，是J2EE中的一个技术 JMS规范​        定义了Java访问消息中间件的接口，但是并没有给予实现。那些实现了JMS接口和JMS规范的称为JMS Provider 例如：ActiveMq JMS Provider​        实现了JMS接口和规范的消息中间件 JMS Message">
-<meta name="twitter:image" content="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/assets/topic.png">
+<meta name="twitter:image" content="https://fengxingxia.github.io/2019/07/08/ActiveMq--JMS基本概念/topic.png">
 
 
 
@@ -368,7 +368,7 @@
 </ul>
 </li>
 <li><p>在P2P中，消息的destination被称之为Queue ，而在Pub / Sub 中则被称之为Topic</p>
-<p><img src="/2019/07/08/ActiveMq--JMS基本概念/assets/topic.png" alt></p>
+<p><img src="/2019/07/08/ActiveMq--JMS基本概念/topic.png" alt></p>
 </li>
 </ol>
 <h3 id="JMS的消息结构"><a href="#JMS的消息结构" class="headerlink" title="JMS的消息结构"></a>JMS的消息结构</h3><p>​        JMS消息由三部分组成：消息头、属性和消息体</p>
@@ -395,10 +395,14 @@
 <p>消息的重新投递，如果一个客户端收到了消息设置了JMS Redelivered的属性，则表示之前可能已经接收过该消息，但是由于某种原因没有确认（acknowledge）,如果该消息被重新投递，那么这个属性的值为true，反之则为false</p>
 </li>
 </ul>
-<h5 id="JMS消息属性"><a href="#JMS消息属性" class="headerlink" title="JMS消息属性"></a>JMS消息属性</h5><pre><code>1. 由应用程序设置和添加的属性，比如：message.setStringProperty( &quot;key&quot;, &quot;value&quot;); 
-  2. 使用JMS定义的属性，使用JMSX作为消息的前缀，如：JMSXUserID：发送消息的用户标识，发送时提供商设置，JMSXAppID: 发送消息时的应用ID，发送时由提供商设置等等
-    3. JMS供应商特定的属性
-</code></pre><h3 id="JMS的可靠性机制"><a href="#JMS的可靠性机制" class="headerlink" title="JMS的可靠性机制"></a>JMS的可靠性机制</h3><ul>
+<h5 id="JMS消息属性"><a href="#JMS消息属性" class="headerlink" title="JMS消息属性"></a>JMS消息属性</h5><ol>
+<li><p>由应用程序设置和添加的属性，比如：message.setStringProperty( “key”, “value”); </p>
+</li>
+<li><p>使用JMS定义的属性，使用JMSX作为消息的前缀，如：JMSXUserID：发送消息的用户标识，发送时提供商设置，JMSXAppID: 发送消息时的应用ID，发送时由提供商设置等等</p>
+</li>
+<li>JMS供应商特定的属性</li>
+</ol>
+<h3 id="JMS的可靠性机制"><a href="#JMS的可靠性机制" class="headerlink" title="JMS的可靠性机制"></a>JMS的可靠性机制</h3><ul>
 <li><h4 id="消息接收确认"><a href="#消息接收确认" class="headerlink" title="消息接收确认"></a>消息接收确认</h4><p>​        一个消息只有被确认之后，才被认为是成功消费了，消息的成功消费通常需要包含三个阶段：客户端接收消息、处理消息和消息确认</p>
 <p>在事务性会话中，当一个事务提交后，消息确认自动发生</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 事务性会话，第一个参数为true</span></span><br><span class="line">Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);  </span><br><span class="line"><span class="comment">// 事务提交，消息确认自动发生</span></span><br><span class="line">session.commit();</span><br></pre></td></tr></table></figure>
