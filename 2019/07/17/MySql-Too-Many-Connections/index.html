@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="消息系统,">
+  <meta name="keywords" content="项目经历,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="KafKa的设计目标 高吞吐率在廉价的商用机器上单机可以支持每秒100万条消息的读写  消息持久化所有消息均被持久化到磁盘上，无消息丢失，支持消息重放  完全分布式Producer、Broker、Consumer均支持水平扩展  同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）  KafKa的安装 下载地址：http://kafka.apache.org/downloads.htm">
-<meta name="keywords" content="消息系统">
+<meta name="description" content="背景：​        公司部署的应用是一整套应用服务，在一个Tomcat中包含5个子模块，其中有两个是做数据级联操作，也就是保存各子系统推送的数据，并向它的上级推送。这两个模块对数据库的访问尤其是插入操作比较频繁。另外，这台服务器还部署了MySQL，Redis，Mq等应用 ​        今天早上现场人员说web平台又崩溃了，访问不了，查看应用日志发现大量的MySql Too Many Con">
+<meta name="keywords" content="项目经历">
 <meta property="og:type" content="article">
-<meta property="og:title" content="走进Kafka">
-<meta property="og:url" content="https://fengxingxia.github.io/2019/07/01/走进Kafka/index.html">
+<meta property="og:title" content="MySql Too Many Connections">
+<meta property="og:url" content="https://fengxingxia.github.io/2019/07/17/MySql-Too-Many-Connections/index.html">
 <meta property="og:site_name" content="Summer_wind&#39;s Blog">
-<meta property="og:description" content="KafKa的设计目标 高吞吐率在廉价的商用机器上单机可以支持每秒100万条消息的读写  消息持久化所有消息均被持久化到磁盘上，无消息丢失，支持消息重放  完全分布式Producer、Broker、Consumer均支持水平扩展  同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）  KafKa的安装 下载地址：http://kafka.apache.org/downloads.htm">
+<meta property="og:description" content="背景：​        公司部署的应用是一整套应用服务，在一个Tomcat中包含5个子模块，其中有两个是做数据级联操作，也就是保存各子系统推送的数据，并向它的上级推送。这两个模块对数据库的访问尤其是插入操作比较频繁。另外，这台服务器还部署了MySQL，Redis，Mq等应用 ​        今天早上现场人员说web平台又崩溃了，访问不了，查看应用日志发现大量的MySql Too Many Con">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-03T13:27:46.868Z">
+<meta property="og:updated_time" content="2019-07-18T15:26:14.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="走进Kafka">
-<meta name="twitter:description" content="KafKa的设计目标 高吞吐率在廉价的商用机器上单机可以支持每秒100万条消息的读写  消息持久化所有消息均被持久化到磁盘上，无消息丢失，支持消息重放  完全分布式Producer、Broker、Consumer均支持水平扩展  同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）  KafKa的安装 下载地址：http://kafka.apache.org/downloads.htm">
+<meta name="twitter:title" content="MySql Too Many Connections">
+<meta name="twitter:description" content="背景：​        公司部署的应用是一整套应用服务，在一个Tomcat中包含5个子模块，其中有两个是做数据级联操作，也就是保存各子系统推送的数据，并向它的上级推送。这两个模块对数据库的访问尤其是插入操作比较频繁。另外，这台服务器还部署了MySQL，Redis，Mq等应用 ​        今天早上现场人员说web平台又崩溃了，访问不了，查看应用日志发现大量的MySql Too Many Con">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://fengxingxia.github.io/2019/07/01/走进Kafka/">
+  <link rel="canonical" href="https://fengxingxia.github.io/2019/07/17/MySql-Too-Many-Connections/">
 
 
 
 
 
-  <title>走进Kafka | Summer_wind's Blog</title>
+  <title>MySql Too Many Connections | Summer_wind's Blog</title>
   
 
 
@@ -251,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/01/走进Kafka/">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/17/MySql-Too-Many-Connections/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chen_jianhui">
@@ -268,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">走进Kafka</h1>
+          <h1 class="post-title" itemprop="name headline">MySql Too Many Connections</h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-01T22:24:02+08:00">
-                2019-07-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-17T22:25:38+08:00">
+                2019-07-17
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/消息系统/" itemprop="url" rel="index">
-                    <span itemprop="name">消息系统</span>
+                  <a href="/categories/项目经历/" itemprop="url" rel="index">
+                    <span itemprop="name">项目经历</span>
                   </a>
                 </span>
 
@@ -340,26 +340,47 @@
       
 
       
-        <h3 id="KafKa的设计目标"><a href="#KafKa的设计目标" class="headerlink" title="KafKa的设计目标"></a>KafKa的设计目标</h3><ul>
-<li><h4 id="高吞吐率"><a href="#高吞吐率" class="headerlink" title="高吞吐率"></a>高吞吐率</h4><p>在廉价的商用机器上单机可以支持每秒100万条消息的读写</p>
+        <h3 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h3><p>​        公司部署的应用是一整套应用服务，在一个Tomcat中包含5个子模块，其中有两个是做数据级联操作，也就是保存各子系统推送的数据，并向它的上级推送。这两个模块对数据库的访问尤其是插入操作比较频繁。另外，这台服务器还部署了MySQL，Redis，Mq等应用</p>
+<p>​        今天早上现场人员说web平台又崩溃了，访问不了，查看应用日志发现大量的MySql Too Many Connections异常，第一反应数据库连接被占满了，导致没有空闲的连接可以使用了。这个时候无论是使用mysql命令直连数据库还是通过Navicat连接数据库都连接不上，show full processlist命令根本使用不了，无法定位是哪个应用出的问题，所以只能先回收被占用的连接，让数据库恢复正常使用。</p>
+<ol>
+<li><p>使用如下命令，查看当前连接状况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -an | awk '/^tcp/ &#123;++S[$NF]&#125; END &#123;for(a in S) print a, S[a]'</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TIME_WAIT 42906</span><br><span class="line">ESTABLISHED 13</span><br><span class="line">LISTEN 1</span><br></pre></td></tr></table></figure>
+<p>发现大量的MySQL连接处于TIME_WAIT状态，只有少数处于连接状态，这显然是不正常的</p>
 </li>
-<li><h4 id="消息持久化"><a href="#消息持久化" class="headerlink" title="消息持久化"></a>消息持久化</h4><p>所有消息均被持久化到磁盘上，无消息丢失，支持消息重放</p>
+<li><p>可以通过调整内核参数来回收这些处于TIME_WAIT状态的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysctl.cnf</span><br><span class="line"><span class="meta">#</span> 添加如下信息</span><br><span class="line">net.ipv4.tcp_syncookies = 1</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30</span><br><span class="line">net.ipv4.tcp_timestamps</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>net.ipv4.tcp_syncookies = 1表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；</p>
 </li>
-<li><h4 id="完全分布式"><a href="#完全分布式" class="headerlink" title="完全分布式"></a>完全分布式</h4><p>Producer、Broker、Consumer均支持水平扩展</p>
+<li><p>net.ipv4.tcp_tw_reuse = 1表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；</p>
 </li>
-<li><h4 id="同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）"><a href="#同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）" class="headerlink" title="同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）"></a>同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）</h4></li>
+<li><p>net.ipv4.tcp_tw_recycle = 1表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。</p>
+</li>
+<li><p>net.ipv4.tcp_fin_timeout修改系統默认的TIMEOUT时间</p>
+</li>
 </ul>
-<h3 id="KafKa的安装"><a href="#KafKa的安装" class="headerlink" title="KafKa的安装"></a>KafKa的安装</h3><ul>
-<li>下载地址：<a href="http://kafka.apache.org/downloads.html" target="_blank" rel="noopener">http://kafka.apache.org/downloads.html</a></li>
-<li>进入到bin目录下启动zookeeper：sh zookeeper-server-start.sh ../config/zookeeper.properties</li>
-<li>bin目录下启动kafka：sh kafka-server-start.sh ../config/server.properties</li>
-</ul>
-<h4 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h4><ul>
-<li>创建topic：sh kafka-topics.sh –zookeeper localhost:2182 –create –topic test1 –partitions 3 –replication-factor 1</li>
-<li>查看topic描述：sh kafka-topics.sh –zookeeper localhost:2182 –descripe –topic test1</li>
-<li>订阅消息：bin/kafka-console-consumer.sh –bootstrap-server 127.0.0.1:2182 –topic test1</li>
-</ul>
-<p>​    </p>
+<font color="red">1、开启tcp_timestamp是开启tcp_tw_recycle，tcp_tw_reuse和tcp_timestamp的前提条件。</font>
+
+<font color="red">2、但是在nat模式下，不用将tcp_tw_recycle和tcp_timestamp同时开启，这会造成tcp超时引发故障。</font>
+</li>
+<li><p>使用命令 /sbin/sysctl -p 使刚修改的参数生效</p>
+</li>
+<li><p>再次使用命令查看，明显的发现TIME_WAIT的数量减少了，mysql可以重新连上了</p>
+</li>
+<li><p>现场恢复使用后，开始排查是什么原因导致的，打开每个模块的配置文件，看到每个模块配置的druid的最大连接数都为200，查看 mysql/conf/my.cnf文件，发现这里配置的 max_connections 为500，max_connect_errors=10000，那么推测，当平台设备上报的采集的人脸、车辆等抓拍记录较多的时候，可能会将整个 druid的连接数全部占用，由于每个模块的最大连接均为200，那么是有可能达到数据的最大连接数500的</p>
+</li>
+<li><p>随后修改了每个模块的连接数大小为50，并将先前修改的内核参数还原回去，重启应用，观察情况</p>
+</li>
+<li><p>应用到目前为止还处于正常运行状态，需要再进一步观察</p>
+</li>
+</ol>
+<h3 id="延伸："><a href="#延伸：" class="headerlink" title="延伸："></a>延伸：</h3><p>​        出现以上问题的原因可能是因为项目中连接池配置不合理导致的，那么应该如何去配置呢</p>
+<p>​        当配置的连接数过大时，可能因为线程间的上下文切换频繁而导致性能的下降，因为大部分的数据库都是将数据存储在磁盘上的，那么在进行数据访问时就必然的要进行磁盘IO操作，在这段时间内，线程是处于“阻塞”状态的，那么此时操作系统可以将这个空闲的CPU服务于其他线程，等IO操作完毕后再切回来。所以，当我们处理的业务是IO密集型的业务时，我们设置的连接数大小可以比核心数大些，这样可以提高吞吐量。</p>
+<p>​        至于，需要设置成多大，还和网络IO，磁盘类型，带宽等有一定的关系，比如，在使用SSD硬盘时，由于读写快，IO阻塞的时间小，可以将连接数设置的更小一些，带宽高的又会比带宽小的阻塞小一些，也可以设置的更小一些。</p>
+<p>​        可以参考的连接数计算公式：(核心数 * 2 ) + 有效磁盘数)</p>
+<p>​        应该尽量去设置一个合适的小连接池和一个等待连接的线程队列，不宜设置过大，像我们最开始设置的200，显然是过大了。</p>
 
       
     </div>
@@ -377,7 +398,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/消息系统/" rel="tag"># 消息系统</a>
+            <a href="/tags/项目经历/" rel="tag"># 项目经历</a>
           
         </div>
       
@@ -390,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/30/Kafka简介/" rel="next" title="消息系统简介">
-                <i class="fa fa-chevron-left"></i> 消息系统简介
+              <a href="/2019/07/16/JMS-API-消息发布与接收/" rel="next" title="JMS-API-消息发布与接收">
+                <i class="fa fa-chevron-left"></i> JMS-API-消息发布与接收
               </a>
             
           </div>
@@ -399,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/08/ActiveMq--JMS基本概念/" rel="prev" title="ActiveMq--JMS基本概念">
-                ActiveMq--JMS基本概念 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -536,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#KafKa的设计目标"><span class="nav-number">1.</span> <span class="nav-text">KafKa的设计目标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高吞吐率"><span class="nav-number">1.1.</span> <span class="nav-text">高吞吐率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息持久化"><span class="nav-number">1.2.</span> <span class="nav-text">消息持久化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完全分布式"><span class="nav-number">1.3.</span> <span class="nav-text">完全分布式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）"><span class="nav-number">1.4.</span> <span class="nav-text">同时满足适应在线处理和离线批处理能力（如Hadoop，Hive）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KafKa的安装"><span class="nav-number">2.</span> <span class="nav-text">KafKa的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单使用"><span class="nav-number">2.1.</span> <span class="nav-text">简单使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景："><span class="nav-number">1.</span> <span class="nav-text">背景：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延伸："><span class="nav-number">2.</span> <span class="nav-text">延伸：</span></a></li></ol></div>
             
 
           </div>

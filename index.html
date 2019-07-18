@@ -247,6 +247,188 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/17/MySql-Too-Many-Connections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chen_jianhui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://example.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_wind's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/17/MySql-Too-Many-Connections/" itemprop="url">MySql Too Many Connections</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-17T22:25:38+08:00">
+                2019-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目经历/" itemprop="url" rel="index">
+                    <span itemprop="name">项目经历</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h3><p>​        公司部署的应用是一整套应用服务，在一个Tomcat中包含5个子模块，其中有两个是做数据级联操作，也就是保存各子系统推送的数据，并向它的上级推送。这两个模块对数据库的访问尤其是插入操作比较频繁。另外，这台服务器还部署了MySQL，Redis，Mq等应用</p>
+<p>​        今天早上现场人员说web平台又崩溃了，访问不了，查看应用日志发现大量的MySql Too Many Connections异常，第一反应数据库连接被占满了，导致没有空闲的连接可以使用了。这个时候无论是使用mysql命令直连数据库还是通过Navicat连接数据库都连接不上，show full processlist命令根本使用不了，无法定位是哪个应用出的问题，所以只能先回收被占用的连接，让数据库恢复正常使用。</p>
+<ol>
+<li><p>使用如下命令，查看当前连接状况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -an | awk '/^tcp/ &#123;++S[$NF]&#125; END &#123;for(a in S) print a, S[a]'</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TIME_WAIT 42906</span><br><span class="line">ESTABLISHED 13</span><br><span class="line">LISTEN 1</span><br></pre></td></tr></table></figure>
+<p>发现大量的MySQL连接处于TIME_WAIT状态，只有少数处于连接状态，这显然是不正常的</p>
+</li>
+<li><p>可以通过调整内核参数来回收这些处于TIME_WAIT状态的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysctl.cnf</span><br><span class="line"><span class="meta">#</span> 添加如下信息</span><br><span class="line">net.ipv4.tcp_syncookies = 1</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30</span><br><span class="line">net.ipv4.tcp_timestamps</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>net.ipv4.tcp_syncookies = 1表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；</p>
+</li>
+<li><p>net.ipv4.tcp_tw_reuse = 1表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；</p>
+</li>
+<li><p>net.ipv4.tcp_tw_recycle = 1表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。</p>
+</li>
+<li><p>net.ipv4.tcp_fin_timeout修改系統默认的TIMEOUT时间</p>
+</li>
+</ul>
+<font color="red">1、开启tcp_timestamp是开启tcp_tw_recycle，tcp_tw_reuse和tcp_timestamp的前提条件。</font>
+
+<font color="red">2、但是在nat模式下，不用将tcp_tw_recycle和tcp_timestamp同时开启，这会造成tcp超时引发故障。</font>
+</li>
+<li><p>使用命令 /sbin/sysctl -p 使刚修改的参数生效</p>
+</li>
+<li><p>再次使用命令查看，明显的发现TIME_WAIT的数量减少了，mysql可以重新连上了</p>
+</li>
+<li><p>现场恢复使用后，开始排查是什么原因导致的，打开每个模块的配置文件，看到每个模块配置的druid的最大连接数都为200，查看 mysql/conf/my.cnf文件，发现这里配置的 max_connections 为500，max_connect_errors=10000，那么推测，当平台设备上报的采集的人脸、车辆等抓拍记录较多的时候，可能会将整个 druid的连接数全部占用，由于每个模块的最大连接均为200，那么是有可能达到数据的最大连接数500的</p>
+</li>
+<li><p>随后修改了每个模块的连接数大小为50，并将先前修改的内核参数还原回去，重启应用，观察情况</p>
+</li>
+<li><p>应用到目前为止还处于正常运行状态，需要再进一步观察</p>
+</li>
+</ol>
+<h3 id="延伸："><a href="#延伸：" class="headerlink" title="延伸："></a>延伸：</h3><p>​        出现以上问题的原因可能是因为项目中连接池配置不合理导致的，那么应该如何去配置呢</p>
+<p>​        当配置的连接数过大时，可能因为线程间的上下文切换频繁而导致性能的下降，因为大部分的数据库都是将数据存储在磁盘上的，那么在进行数据访问时就必然的要进行磁盘IO操作，在这段时间内，线程是处于“阻塞”状态的，那么此时操作系统可以将这个空闲的CPU服务于其他线程，等IO操作完毕后再切回来。所以，当我们处理的业务是IO密集型的业务时，我们设置的连接数大小可以比核心数大些，这样可以提高吞吐量。</p>
+<p>​        至于，需要设置成多大，还和网络IO，磁盘类型，带宽等有一定的关系，比如，在使用SSD硬盘时，由于读写快，IO阻塞的时间小，可以将连接数设置的更小一些，带宽高的又会比带宽小的阻塞小一些，也可以设置的更小一些。</p>
+<p>​        可以参考的连接数计算公式：(核心数 * 2 ) + 有效磁盘数)</p>
+<p>​        应该尽量去设置一个合适的小连接池和一个等待连接的线程队列，不宜设置过大，像我们最开始设置的200，显然是过大了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/16/JMS-API-消息发布与接收/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1717,164 +1899,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/11/一次项目崩溃异常排查/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chen_jianhui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://example.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Summer_wind's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/11/一次项目崩溃异常排查/" itemprop="url">一次项目崩溃异常排查</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T21:01:49+08:00">
-                2019-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目经历/" itemprop="url" rel="index">
-                    <span itemprop="name">项目经历</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>​        项目崩溃，Web页面进不去，用top命令查看发现java和mysql占用的CPU异常高，服务器配置的16G内存，也只剩几百M了。</p>
-<p>​        排查过程：</p>
-<ol>
-<li>查看日志，各应用日志没有发现明显的异常，但是在Tomcat的日志中却疯狂出现OutOfMemoryError异常。</li>
-<li>抓取dump文件进行分析，发现一个接收mq的处理类里面用了ArrayBlockingQueue，每一次mq消息过来之后，并不是马上就处理，而是先添加到BlockingQueue里面，之后再从BlockingQueue中取出消息进行处理。问题也就出现在这个Queue里面，当时设的这个queue的最大值为100000。出问题时，队列里还有十多万的数据堆积，也就是说queue缓存队列已经塞满了，查看dump文件，也确实这个BlockingQueue就占用了600多m的内存，而且不仅这一个队列，还有另外一个缓存队列也占用了近300M的内存大小。</li>
-<li>发现这个问题之后，为了让现场可以继续使用，马上将BlockingQueue的大小改小了，重新打包扔到线上。</li>
-<li>出现这个问题的原因也有因为消费者是单线程消费而且每次只从BlockingQueue中poll出一条数据进行处理的原因，后续改成了多线程消费，且每次从队列中取出20条数据进行处理。这样Java的内存消耗和CPU占用也就降下来了。</li>
-<li>但是MySQL的占用依然很高，使用mysql -h 127.0.0.1 -u mysql -p 登录到数据库之后，使用show full processlist;发现有一条SQL的执行效率比较低，需要2S多的时间，而且这条SQL还在大量的使用。</li>
-<li>查看对应的表发现这个表没有建索引，根据条件字段建立索引之后，MySQL的CPU占用率立马降下来了。这样，线上的应用也就恢复了正常</li>
-<li>这样跑了两天之后，突然又崩溃了。但是这次Java和MySQL的内存和CPU占用都不高，这就很奇怪了。</li>
-<li>刚开始查看了日志，发现RabbitMq连接不上，日志中一直在报RabbitMq Connect time out的错误。但是大佬说这应该不会影响整个应用，导致web页面进不去（页面报read time out异常），于是就就继续找原因。开始抓取线上的堆栈信息进行分析。</li>
-<li>之后，还发现一个现象，所有通过http方式访问Tomcat中的应用的地方都不行了。</li>
-<li>最后发现，应用对外提供了一个http接口，在这个接口中会发送RabbitMq消息给其他系统，而这时的RabbitMq是连不上的，但是，每一次请求过来都会去新建一个Cononection和Channel，这样就会导致在调用这个接口的时候需要等到RabbitMq连接超时了之后，才会断开。而RabbitMq的超时时间默认是1分钟，而在这一分钟内，这个接口被大量的调用，导致大量的http连接资源被占用得不到及时的释放。</li>
-<li>查看Tomcat Server.xml中的配置，了解到配置的MaxThreads为150，MaxAccept为300。也就是说最多支持的http并发连接为450</li>
-<li>在项目中，由于设备采集的人脸、车辆抓拍的信息相当多，再加上RabbitMq连接不上，也就出现了这个问题。</li>
-<li>最后，当然是配置了正确的RabbitMq地址之后，解决了问题。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1927,7 +1951,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
