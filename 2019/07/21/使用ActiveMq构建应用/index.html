@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="消息系统,">
+  <meta name="keywords" content="ActiveMq,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="消息系统分类Peer-to-Peer（点对点，往往是单播） 一般基于pull或者polling接收消息  发送队列中的消息被一个且只有一个接收者所接收，即使有多个消费者在监听同一个队列  既可以支持异步“ 即发即弃 ”的消息发送方式，也可以支持同步请求/应答的消息发送方式（即等到消费者成功返回之后再发送下一条消息）   发布/订阅 发布到一个主题的消息，可以被多个订阅者接收  发布/订阅即可基于P">
-<meta name="keywords" content="消息系统">
+<meta name="description" content="Broker：相当于一个ActiveMq服务器实例 命令行启动：activemq start，使用默认的ActiveMq.xml启动 activemq start xbean:file:../conf/ActiveMq-bak.xml：使用指定的配置文件启动 构建java应用嵌入式broker启动123456789101112131415161718// 使用BrokerService启动Brok">
+<meta name="keywords" content="ActiveMq">
 <meta property="og:type" content="article">
-<meta property="og:title" content="消息系统简介">
-<meta property="og:url" content="https://fengxingxia.github.io/2019/06/30/Kafka简介/index.html">
+<meta property="og:title" content="使用ActiveMq构建应用">
+<meta property="og:url" content="https://fengxingxia.github.io/2019/07/21/使用ActiveMq构建应用/index.html">
 <meta property="og:site_name" content="Summer_wind&#39;s Blog">
-<meta property="og:description" content="消息系统分类Peer-to-Peer（点对点，往往是单播） 一般基于pull或者polling接收消息  发送队列中的消息被一个且只有一个接收者所接收，即使有多个消费者在监听同一个队列  既可以支持异步“ 即发即弃 ”的消息发送方式，也可以支持同步请求/应答的消息发送方式（即等到消费者成功返回之后再发送下一条消息）   发布/订阅 发布到一个主题的消息，可以被多个订阅者接收  发布/订阅即可基于P">
+<meta property="og:description" content="Broker：相当于一个ActiveMq服务器实例 命令行启动：activemq start，使用默认的ActiveMq.xml启动 activemq start xbean:file:../conf/ActiveMq-bak.xml：使用指定的配置文件启动 构建java应用嵌入式broker启动123456789101112131415161718// 使用BrokerService启动Brok">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-02T13:40:20.752Z">
+<meta property="og:updated_time" content="2019-07-21T10:13:34.420Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="消息系统简介">
-<meta name="twitter:description" content="消息系统分类Peer-to-Peer（点对点，往往是单播） 一般基于pull或者polling接收消息  发送队列中的消息被一个且只有一个接收者所接收，即使有多个消费者在监听同一个队列  既可以支持异步“ 即发即弃 ”的消息发送方式，也可以支持同步请求/应答的消息发送方式（即等到消费者成功返回之后再发送下一条消息）   发布/订阅 发布到一个主题的消息，可以被多个订阅者接收  发布/订阅即可基于P">
+<meta name="twitter:title" content="使用ActiveMq构建应用">
+<meta name="twitter:description" content="Broker：相当于一个ActiveMq服务器实例 命令行启动：activemq start，使用默认的ActiveMq.xml启动 activemq start xbean:file:../conf/ActiveMq-bak.xml：使用指定的配置文件启动 构建java应用嵌入式broker启动123456789101112131415161718// 使用BrokerService启动Brok">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://fengxingxia.github.io/2019/06/30/Kafka简介/">
+  <link rel="canonical" href="https://fengxingxia.github.io/2019/07/21/使用ActiveMq构建应用/">
 
 
 
 
 
-  <title>消息系统简介 | Summer_wind's Blog</title>
+  <title>使用ActiveMq构建应用 | Summer_wind's Blog</title>
   
 
 
@@ -251,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/06/30/Kafka简介/">
+    <link itemprop="mainEntityOfPage" href="https://fengxingxia.github.io/2019/07/21/使用ActiveMq构建应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chen_jianhui">
@@ -268,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">消息系统简介</h1>
+          <h1 class="post-title" itemprop="name headline">使用ActiveMq构建应用</h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-30T22:33:56+08:00">
-                2019-06-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-21T15:58:23+08:00">
+                2019-07-21
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/消息系统/" itemprop="url" rel="index">
-                    <span itemprop="name">消息系统</span>
+                  <a href="/categories/ActiveMq/" itemprop="url" rel="index">
+                    <span itemprop="name">ActiveMq</span>
                   </a>
                 </span>
 
@@ -340,49 +340,10 @@
       
 
       
-        <h3 id="消息系统分类"><a href="#消息系统分类" class="headerlink" title="消息系统分类"></a>消息系统分类</h3><h4 id="Peer-to-Peer（点对点，往往是单播）"><a href="#Peer-to-Peer（点对点，往往是单播）" class="headerlink" title="Peer-to-Peer（点对点，往往是单播）"></a>Peer-to-Peer（点对点，往往是单播）</h4><ul>
-<li><p>一般基于pull或者polling接收消息</p>
-</li>
-<li><p>发送队列中的消息被一个且只有一个接收者所接收，即使有多个消费者在监听同一个队列</p>
-</li>
-<li><p>既可以支持异步“ 即发即弃 ”的消息发送方式，也可以支持同步请求/应答的消息发送方式（即等到消费者成功返回之后再发送下一条消息）</p>
-</li>
-</ul>
-<h4 id="发布-订阅"><a href="#发布-订阅" class="headerlink" title="发布/订阅"></a>发布/订阅</h4><ul>
-<li><p>发布到一个主题的消息，可以被多个订阅者接收</p>
-</li>
-<li><p>发布/订阅即可基于Push消费数据，也可以基于Pull或者Pollinig的方式消费数据</p>
-</li>
-<li><p>解耦能力比P2P模式更强</p>
-</li>
-</ul>
-<h4 id="KafKa消息系统类型"><a href="#KafKa消息系统类型" class="headerlink" title="KafKa消息系统类型"></a>KafKa消息系统类型</h4><p>​        kafka是同时支持单播和多播的，kafka可以有不同的consumer-group，kafka支持不同消费者组之间的多播，每个consumer-group都会有consumer接收这条消息，也支持在group中的单播，在group中只会有一个consumer消费这条消息。</p>
-<h3 id="消息系统的适用场景"><a href="#消息系统的适用场景" class="headerlink" title="消息系统的适用场景"></a>消息系统的适用场景</h3><ul>
-<li><h4 id="解耦"><a href="#解耦" class="headerlink" title="解耦"></a>解耦</h4><p>各个系统之间通过消息系统这个统一的接口交换数据，不用关心有哪些系统需要处理以及如何处理这条消息。</p>
-</li>
-<li><h4 id="冗余"><a href="#冗余" class="headerlink" title="冗余"></a>冗余</h4><p>部分消息系统具有消息持久化的能力（如KafKa），可以规避消息处理前丢失的风险</p>
-</li>
-<li><h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>消息系统是统一的数据接口，各系统可以独立扩展，不需要感知彼此间的变化</p>
-</li>
-<li><h4 id="峰值处理能力"><a href="#峰值处理能力" class="headerlink" title="峰值处理能力"></a>峰值处理能力</h4><p>消息系统可以顶住峰值流量，系统可以根据自身的处理能力从消息系统中获取定量的请求进行处理，这样就可以在流量高峰期不会导致系统崩溃，也不会因为为了要应对流量高峰期而升级所带来的资源的浪费</p>
-</li>
-<li><h4 id="可恢复性"><a href="#可恢复性" class="headerlink" title="可恢复性"></a>可恢复性</h4><p>系统中部分组件失效并不会影响整个系统，当它恢复后仍可以从消息系统中获取消息进行处理</p>
-</li>
-<li><h4 id="异步通信"><a href="#异步通信" class="headerlink" title="异步通信"></a>异步通信</h4><p>在不需要立即对请求做出处理时，可以将请求放入到消息系统中，在适当的时候从消息系统中取出再进行处理</p>
-</li>
-</ul>
-<h3 id="常用消息系统对比"><a href="#常用消息系统对比" class="headerlink" title="常用消息系统对比"></a>常用消息系统对比</h3><ul>
-<li><h4 id="RabbitMq"><a href="#RabbitMq" class="headerlink" title="RabbitMq"></a>RabbitMq</h4><p>基于Erlang编写的，支持多协议：AMQP（语言无关）, XMPP, SMTP, STOMP,支持负载均衡，数据持久化，同时支持P2P和发布/订阅模式，但是比较的重量级，适合在较为重量型的企业应用中</p>
-</li>
-<li><h4 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h4><p>支持MQ功能，可以做轻量级队列服务使用，就入队而言，Redis对于短消息（小于10KB）的性能要比RabbitMq好，但是长消息的性能比RabbitMq差</p>
-</li>
-<li><h4 id="ActiveMq"><a href="#ActiveMq" class="headerlink" title="ActiveMq"></a>ActiveMq</h4><p>JMS实现，P2P点对点模式，支持持久化，支持XA事务</p>
-</li>
-<li><h4 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h4><p>高性能跨语言的分布式发布/订阅消息系统，支持数据持久化，全分布式，同时支持在线和离线的处理</p>
-</li>
-<li><h4 id="RocketMq"><a href="#RocketMq" class="headerlink" title="RocketMq"></a>RocketMq</h4><p>纯Java实现，发布/订阅消息系统，支持本地事务和分布式XA事务</p>
-</li>
-</ul>
+        <p>Broker：相当于一个ActiveMq服务器实例</p>
+<p>命令行启动：activemq start，使用默认的ActiveMq.xml启动</p>
+<p>activemq start xbean:file:../conf/ActiveMq-bak.xml：使用指定的配置文件启动</p>
+<h2 id="构建java应用"><a href="#构建java应用" class="headerlink" title="构建java应用"></a>构建java应用</h2><h3 id="嵌入式broker启动"><a href="#嵌入式broker启动" class="headerlink" title="嵌入式broker启动"></a>嵌入式broker启动</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用BrokerService启动</span></span><br><span class="line">BrokerService brokerService = <span class="keyword">new</span> BrokerService();</span><br><span class="line">brokerService.setUseJmx(<span class="keyword">true</span>);</span><br><span class="line">brokerService.addConnector(<span class="string">"tcp://47.105.172.68:61616"</span>);</span><br><span class="line">brokerService.start();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用BrokerFactory启动</span></span><br><span class="line">String uri = <span class="string">"properties:broker.properties"</span>;</span><br><span class="line">BrokerService broker = BrokerFactory.createBroker(<span class="keyword">new</span> URI(uri));</span><br><span class="line">broker.addConnector(<span class="string">"tcp://47.105.172.68:61616"</span>);</span><br><span class="line">broker.start();</span><br><span class="line"></span><br><span class="line"><span class="comment">// broker.properties</span></span><br><span class="line">useJmx=<span class="keyword">true</span></span><br><span class="line">persistent=<span class="keyword">false</span></span><br><span class="line">brokerName=Hia</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果需要启动多个broke，需要为每个broke设置不同的名字，链接地址也得区分</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -400,7 +361,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/消息系统/" rel="tag"># 消息系统</a>
+            <a href="/tags/ActiveMq/" rel="tag"># ActiveMq</a>
           
         </div>
       
@@ -413,8 +374,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/24/线程安全的单例模式/" rel="next" title="线程安全的单例模式">
-                <i class="fa fa-chevron-left"></i> 线程安全的单例模式
+              <a href="/2019/07/17/MySql-Too-Many-Connections/" rel="next" title="MySql Too Many Connections">
+                <i class="fa fa-chevron-left"></i> MySql Too Many Connections
               </a>
             
           </div>
@@ -422,10 +383,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/01/走进Kafka/" rel="prev" title="走进Kafka">
-                走进Kafka <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,7 +516,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#消息系统分类"><span class="nav-number">1.</span> <span class="nav-text">消息系统分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Peer-to-Peer（点对点，往往是单播）"><span class="nav-number">1.1.</span> <span class="nav-text">Peer-to-Peer（点对点，往往是单播）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布-订阅"><span class="nav-number">1.2.</span> <span class="nav-text">发布/订阅</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KafKa消息系统类型"><span class="nav-number">1.3.</span> <span class="nav-text">KafKa消息系统类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息系统的适用场景"><span class="nav-number">2.</span> <span class="nav-text">消息系统的适用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解耦"><span class="nav-number">2.1.</span> <span class="nav-text">解耦</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冗余"><span class="nav-number">2.2.</span> <span class="nav-text">冗余</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展"><span class="nav-number">2.3.</span> <span class="nav-text">扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#峰值处理能力"><span class="nav-number">2.4.</span> <span class="nav-text">峰值处理能力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可恢复性"><span class="nav-number">2.5.</span> <span class="nav-text">可恢复性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步通信"><span class="nav-number">2.6.</span> <span class="nav-text">异步通信</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用消息系统对比"><span class="nav-number">3.</span> <span class="nav-text">常用消息系统对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RabbitMq"><span class="nav-number">3.1.</span> <span class="nav-text">RabbitMq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis"><span class="nav-number">3.2.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ActiveMq"><span class="nav-number">3.3.</span> <span class="nav-text">ActiveMq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka"><span class="nav-number">3.4.</span> <span class="nav-text">Kafka</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMq"><span class="nav-number">3.5.</span> <span class="nav-text">RocketMq</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#构建java应用"><span class="nav-number">1.</span> <span class="nav-text">构建java应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌入式broker启动"><span class="nav-number">1.1.</span> <span class="nav-text">嵌入式broker启动</span></a></li></ol></li></ol></div>
             
 
           </div>
